@@ -2,6 +2,9 @@
 MaterialX Standard Nodes v1.39
 ----->
 
+- [English](MaterialX.StandardNodes.md)
+- [简体中文](../../../docs_ch/documents/Specification/MaterialX.StandardNodes.md)
+
 
 # MaterialX Standard Nodes
 

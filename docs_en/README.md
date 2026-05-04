@@ -2,6 +2,9 @@
   <img src="https://raw.githubusercontent.com/AcademySoftwareFoundation/MaterialX/main/documents/Images/MaterialXLogo.png" height="170" />
 </p>
 
+- [English](README.md)
+- [简体中文](../docs_ch/README.md)
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/AcademySoftwareFoundation/MaterialX/blob/main/LICENSE)
 [![Version](https://img.shields.io/github/v/release/AcademySoftwareFoundation/MaterialX)](https://github.com/AcademySoftwareFoundation/MaterialX/releases/latest)
 [![Build Status](https://github.com/AcademySoftwareFoundation/MaterialX/workflows/main/badge.svg)](https://github.com/AcademySoftwareFoundation/MaterialX/actions)

@@ -1,5 +1,8 @@
 # MaterialX Graph Editor
 
+- [English](GraphEditor.md)
+- [简体中文](../../../docs_ch/documents/DeveloperGuide/GraphEditor.md)
+
 The MaterialX Graph Editor is an example application for visualizing, creating, and editing MaterialX graphs.  It utilizes the ImGui framework as well as additional ImGui extensions such as the Node Editor.
 
 ## Example Images

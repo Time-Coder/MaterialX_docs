@@ -1,5 +1,8 @@
 # Shader Generation
 
+- [English](ShaderGeneration.md)
+- [简体中文](../../../docs_ch/documents/DeveloperGuide/ShaderGeneration.md)
+
 ## 1.1 Scope
 A shader generation framework is implemented as part of MaterialX. This can help applications to transform the agnostic MaterialX data description into executable shader code for a specific renderer. A library module named MaterialXGenShader contains the core shader generation features, and support for specific languages resides in separate libraries, e.g. [MaterialXGenGlsl](https://github.com/AcademySoftwareFoundation/MaterialX/tree/main/source/MaterialXGenGlsl), [MaterialXGenOsl](https://github.com/AcademySoftwareFoundation/MaterialX/tree/main/source/MaterialXGenOsl).
 

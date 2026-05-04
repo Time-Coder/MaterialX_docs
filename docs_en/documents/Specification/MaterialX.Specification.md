@@ -2,6 +2,9 @@
 MaterialX Specification v1.39
 ----->
 
+- [English](MaterialX.Specification.md)
+- [简体中文](../../../docs_ch/documents/Specification/MaterialX.Specification.md)
+
 
 # MaterialX: An Open Standard for Network-Based CG Object Looks
 

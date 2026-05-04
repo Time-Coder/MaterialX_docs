@@ -2,6 +2,9 @@
 MaterialX 补充说明 v1.39
 ----->
 
+- [English](../../../docs_en/documents/Specification/MaterialX.Supplement.md)
+- [简体中文](MaterialX.Supplement.md)
+
 
 # MaterialX:补充说明
 

@@ -2,6 +2,9 @@
 MaterialX 标准节点 v1.39
 ----->
 
+- [English](../../../docs_en/documents/Specification/MaterialX.StandardNodes.md)
+- [简体中文](MaterialX.StandardNodes.md)
+
 
 # MaterialX 标准节点
 

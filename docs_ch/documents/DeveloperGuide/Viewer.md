@@ -1,5 +1,8 @@
 # MaterialX 查看器
 
+- [English](../../../docs_en/documents/DeveloperGuide/Viewer.md)
+- [简体中文](Viewer.md)
+
 MaterialX 查看器利用着色器生成从 MaterialX 图构建 GLSL 着色器，使用 NanoGUI 框架渲染结果。支持标准的模式和基于物理的着色节点集，并且可以将自定义节点库作为附加库路径包含。
 
 ## 示例图片

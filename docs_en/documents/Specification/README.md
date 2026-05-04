@@ -2,6 +2,9 @@
 README for MaterialX Specification v1.39
 ----->
 
+- [English](README.md)
+- [简体中文](../../../docs_ch/documents/Specification/README.md)
+
 **MaterialX** is an open standard for representing rich material and look-development content in computer graphics, enabling its platform-independent description and exchange across applications and renderers.  MaterialX addresses the need for a common, open standard to represent the data values and relationships required to describe the look of a computer graphics model, including shading networks, patterns and texturing, complex nested materials and geometric assignments. To further encourage interchangeable CG look setups, MaterialX also defines a large set of standard shading and processing nodes with a precise mechanism for functional extensibility.
 
 The documents in this folder comprise the complete MaterialX Specification, version 1.39.

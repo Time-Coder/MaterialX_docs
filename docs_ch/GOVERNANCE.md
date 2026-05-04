@@ -1,5 +1,8 @@
 # MaterialX 项目治理
 
+- [English](../docs_en/GOVERNANCE.md)
+- [简体中文](GOVERNANCE.md)
+
 MaterialX 是 [学院软件基金会](https://www.aswf.io/) 的一个项目，依赖于 ASWF 治理政策，由 Linux 基金会支持。
 
 MaterialX 项目维护一个技术指导委员会（TSC），对项目拥有最终权力。如项目章程所定义，TSC 的职责包括但不限于：

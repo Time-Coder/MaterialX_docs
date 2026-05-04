@@ -2,6 +2,9 @@
 MaterialX Supplemental Notes v1.39
 ----->
 
+- [English](MaterialX.Supplement.md)
+- [简体中文](../../../docs_ch/documents/Specification/MaterialX.Supplement.md)
+
 
 # MaterialX: Supplemental Notes
 

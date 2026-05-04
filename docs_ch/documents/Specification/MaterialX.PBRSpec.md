@@ -2,6 +2,9 @@
 MaterialX 基于物理的着色节点 v1.39
 ----->
 
+- [English](../../../docs_en/documents/Specification/MaterialX.PBRSpec.md)
+- [简体中文](MaterialX.PBRSpec.md)
+
 
 # MaterialX 基于物理的着色节点
 

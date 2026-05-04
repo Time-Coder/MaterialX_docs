@@ -1,5 +1,8 @@
 # MaterialX 图形编辑器
 
+- [English](../../../docs_en/documents/DeveloperGuide/GraphEditor.md)
+- [简体中文](GraphEditor.md)
+
 MaterialX 图形编辑器是一个用于可视化、创建和编辑 MaterialX 图形的示例应用程序。它使用 ImGui 框架以及额外的 ImGui 扩展（如节点编辑器）。
 
 ## 示例图片

@@ -2,6 +2,9 @@
 MaterialX NPR 着色节点 v1.39
 ----->
 
+- [English](../../../docs_en/documents/Specification/MaterialX.NPRSpec.md)
+- [简体中文](MaterialX.NPRSpec.md)
+
 
 # MaterialX NPR 着色节点
 

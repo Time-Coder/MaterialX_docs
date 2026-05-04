@@ -2,6 +2,9 @@
 MaterialX NPR Shading Nodes v1.39
 ----->
 
+- [English](MaterialX.NPRSpec.md)
+- [简体中文](../../../docs_ch/documents/Specification/MaterialX.NPRSpec.md)
+
 
 # MaterialX NPR Shading Nodes
 

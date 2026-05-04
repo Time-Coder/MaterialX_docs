@@ -1,5 +1,8 @@
 # 为 MaterialX 做出贡献
 
+- [English](../docs_en/CONTRIBUTING.md)
+- [简体中文](CONTRIBUTING.md)
+
 感谢您对为 MaterialX 做出贡献的兴趣！本文档解释了我们的贡献流程和程序。
 
 ## 社区和讨论

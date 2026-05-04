@@ -1,5 +1,8 @@
 # Security Policy
 
+- [English](SECURITY.md)
+- [简体中文](../docs_ch/SECURITY.md)
+
 ## Reporting a Vulnerability
 
 If you think you've found a potential vulnerability in MaterialX, please report

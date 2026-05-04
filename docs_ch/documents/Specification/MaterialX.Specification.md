@@ -2,6 +2,9 @@
 MaterialX 规范 v1.39
 ----->
 
+- [English](../../../docs_en/documents/Specification/MaterialX.Specification.md)
+- [简体中文](MaterialX.Specification.md)
+
 
 # MaterialX: 基于网络的 CG 对象外观开放标准
 

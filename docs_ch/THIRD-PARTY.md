@@ -1,5 +1,8 @@
 # 第三方项目许可证
 
+- [English](../docs_en/THIRD-PARTY.md)
+- [简体中文](THIRD-PARTY.md)
+
 本节记录了已导入或合并到 MaterialX 中的第三方项目的许可证。所有这些都与 MaterialX 项目开源的 [主许可证](LICENSE) 兼容。如果您发现任何错误或遗漏，请告诉我们，我们将很乐意解决。
 
 ### [PyBind11](https://pybind11.readthedocs.io/en/latest/)

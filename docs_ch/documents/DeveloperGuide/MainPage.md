@@ -1,5 +1,8 @@
 # MaterialX 概述
 
+- [English](../../../docs_en/documents/DeveloperGuide/MainPage.md)
+- [简体中文](MainPage.md)
+
 MaterialX 是一种开放标准，用于在计算机图形学中表示丰富的材质和外观开发内容，使其能够在应用程序和渲染器之间进行平台无关的描述和交换。MaterialX 于 2012 年在 [工业光魔](https://www.ilm.com/) 推出，自《星球大战：原力觉醒》和《千年隼号：走私者快跑》以来，一直是其故事片和实时体验中的关键技术。该项目于 2017 年作为开源项目发布，包括索尼影视图像工艺公司、皮克斯、Autodesk、Adobe 和 SideFX 等公司在内，为其持续开发做出了贡献。2021 年，MaterialX 成为 [学院软件基金会](https://www.aswf.io/) 的第七个托管项目。
 
 ## 开发者快速入门

@@ -2,6 +2,9 @@
 MaterialX 几何扩展 v1.39
 ----->
 
+- [English](../../../docs_en/documents/Specification/MaterialX.GeomExts.md)
+- [简体中文](MaterialX.GeomExts.md)
+
 
 # MaterialX 几何扩展
 

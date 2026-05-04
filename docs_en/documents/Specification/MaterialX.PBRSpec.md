@@ -2,6 +2,9 @@
 MaterialX Physically Based Shading Nodes v1.39
 ----->
 
+- [English](MaterialX.PBRSpec.md)
+- [简体中文](../../../docs_ch/documents/Specification/MaterialX.PBRSpec.md)
+
 
 # MaterialX Physically Based Shading Nodes
 

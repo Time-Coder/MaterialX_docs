@@ -1,5 +1,8 @@
 # Contributing to MaterialX
 
+- [English](CONTRIBUTING.md)
+- [简体中文](../docs_ch/CONTRIBUTING.md)
+
 Thank you for your interest in contributing to MaterialX! This document
 explains our contribution process and procedures.
 

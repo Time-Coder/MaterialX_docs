@@ -1,5 +1,8 @@
 # 安全政策
 
+- [English](../docs_en/SECURITY.md)
+- [简体中文](SECURITY.md)
+
 ## 报告漏洞
 
 如果您认为在 MaterialX 中发现了潜在的安全漏洞，请通过发送电子邮件至 <materialx-tsc-private@lists.aswf.io> 进行报告。只有技术指导委员会成员和学院软件基金会项目管理才能访问这些消息。包括重现问题的详细步骤，以及任何可能有助于调查的其他信息。我们的政策是在 14 天内回应漏洞报告。

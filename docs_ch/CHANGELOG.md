@@ -1,5 +1,8 @@
 # Change Log
 
+- [English](../docs_en/CHANGELOG.md)
+- [简体中文](CHANGELOG.md)
+
 ## [1.39.5] - Development
 
 ### Added
@@ -424,27 +427,27 @@
 
 ## [1.38.4] - 2022-04-06
 
-### Added
-- Added [JavaScript bindings](https://github.com/AcademySoftwareFoundation/MaterialX/tree/main/javascript) for MaterialXCore, MaterialXFormat, and MaterialXGenGlsl.
-- Added a sample [Web Viewer](https://academysoftwarefoundation.github.io/MaterialX/), built and deployed through GitHub Actions.
-- Added a MaterialX graph for the [glTF PBR](libraries/bxdf/gltf_pbr.mtlx) shading model.
-- Added new 'worleynoise2d' and 'worleynoise3d' nodes, with implementations in GLSL, OSL, and MDL.
-- Added new 'surface_unlit' node, with implementations in GLSL, OSL, and MDL.
-- Added support for the glTF geometry format in MaterialXRender and MaterialXView.
+### 新增
+- 为 MaterialXCore、MaterialXFormat 和 MaterialXGenGlsl 添加了 [JavaScript 绑定](https://github.com/AcademySoftwareFoundation/MaterialX/tree/main/javascript)。
+- 添加了示例 [Web Viewer](https://academysoftwarefoundation.github.io/MaterialX/)，通过 GitHub Actions 构建和部署。
+- 为 [glTF PBR](libraries/bxdf/gltf_pbr.mtlx) 着色模型添加了 MaterialX 图谱。
+- 添加了新的 'worleynoise2d' 和 'worleynoise3d' 节点，在 GLSL、OSL 和 MDL 中提供了实现。
+- 添加了新的 'surface_unlit' 节点，在 GLSL、OSL 和 MDL 中提供了实现。
+- 在 MaterialXRender 和 MaterialXView 中添加了对 glTF 几何格式的支持。
 
-### Changed
-- Moved the MaterialX project to the [Academy Software Foundation GitHub](https://github.com/AcademySoftwareFoundation/MaterialX).
-- Removed hardcoded references to "libraries" in calls to GenContext::registerSourceCodeSearchPath.  (See Developer Notes below for additional details.)
-- Improved the accuracy of mx_ggx_dir_albedo_analytic and mx_fresnel_conductor in GLSL.
-- Updated the PyBind11 library to version 2.9.0.
+### 更改
+- 将 MaterialX 项目移至 [Academy Software Foundation GitHub](https://github.com/AcademySoftwareFoundation/MaterialX)。
+- 移除了 GenContext::registerSourceCodeSearchPath 调用中对 "libraries" 的硬编码引用。（详见下面的开发者说明。）
+- 提高了 GLSL 中 mx_ggx_dir_albedo_analytic 和 mx_fresnel_conductor 的准确性。
+- 将 PyBind11 库更新到版本 2.9.0。
 
-### Fixed
-- Aligned GLSL and MDL implementations of 'fractal3d' with OSL.
-- Fixed MDL implementations of 'sheen_bsdf' and 'thin_film_bsdf'.
-- Fixed an error in code generation from multi-output node graphs.
+### 修复
+- 将 'fractal3d' 的 GLSL 和 MDL 实现与 OSL 对齐。
+- 修复了 'sheen_bsdf' 和 'thin_film_bsdf' 的 MDL 实现。
+- 修复了多输出节点图谱代码生成中的错误。
 
-### Developer Notes
-- This release removes hardcoded references to "libraries" in calls to GenContext::registerSourceCodeSearchPath within the MaterialX codebase.  Applications with their own custom code generators should make the same change, removing hardcoded references to "libraries" in calls to GenContext::registerSourceCodeSearchPath.  See pull request [877](https://github.com/AcademySoftwareFoundation/MaterialX/pull/877) for coding details.
+### 开发者说明
+- 此版本移除了 MaterialX 代码库中 GenContext::registerSourceCodeSearchPath 调用中对 "libraries" 的硬编码引用。拥有自定义代码生成器的应用程序应进行相同的更改，移除 GenContext::registerSourceCodeSearchPath 调用中对 "libraries" 的硬编码引用。有关编码详细信息，请参阅拉取请求 [877](https://github.com/AcademySoftwareFoundation/MaterialX/pull/877)。
 
 ## [1.38.3] - 2021-12-14
 

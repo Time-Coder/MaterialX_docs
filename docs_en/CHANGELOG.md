@@ -1,5 +1,8 @@
 # Change Log
 
+- [English](CHANGELOG.md)
+- [简体中文](../docs_ch/CHANGELOG.md)
+
 ## [1.39.5] - Development
 
 ### Added

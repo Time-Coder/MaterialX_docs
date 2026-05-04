@@ -1,5 +1,8 @@
 # MaterialX Project Governance
 
+- [English](GOVERNANCE.md)
+- [简体中文](../docs_ch/GOVERNANCE.md)
+
 MaterialX is a project of the
 [Academy Software Foundation](https://www.aswf.io/) and relies on the ASWF
 governance policies, supported by the Linux Foundation.

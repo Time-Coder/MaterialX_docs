@@ -1,5 +1,8 @@
 # Third-Party Project Licenses
 
+- [English](THIRD-PARTY.md)
+- [简体中文](../docs_ch/THIRD-PARTY.md)
+
 This section documents the licenses of third-party projects that have been imported or incorporated into MaterialX.  All of these are compatible with the [main license](LICENSE) under which the MaterialX project is open-sourced.  Let us know if you notice any errors or omissions and we'd be happy to address them.
 
 ### [PyBind11](https://pybind11.readthedocs.io/en/latest/)

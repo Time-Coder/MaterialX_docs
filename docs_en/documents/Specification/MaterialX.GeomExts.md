@@ -2,6 +2,9 @@
 MaterialX Geometry Extensions v1.39
 ----->
 
+- [English](MaterialX.GeomExts.md)
+- [简体中文](../../../docs_ch/documents/Specification/MaterialX.GeomExts.md)
+
 
 # MaterialX Geometry Extensions
 

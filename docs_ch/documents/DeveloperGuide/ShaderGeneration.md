@@ -1,5 +1,8 @@
 # 着色器生成
 
+- [English](../../../docs_en/documents/DeveloperGuide/ShaderGeneration.md)
+- [简体中文](ShaderGeneration.md)
+
 ## 1.1 范围
 MaterialX 中实现了一个着色器生成框架。这可以帮助应用程序将与设备无关的 MaterialX 数据描述转换为特定渲染器的可执行着色器代码。名为 MaterialXGenShader 的库模块包含核心着色器生成功能，而对特定语言的支持位于单独的库中，例如 [MaterialXGenGlsl](https://github.com/AcademySoftwareFoundation/MaterialX/tree/main/source/MaterialXGenGlsl)、[MaterialXGenOsl](https://github.com/AcademySoftwareFoundation/MaterialX/tree/main/source/MaterialXGenOsl)。
 

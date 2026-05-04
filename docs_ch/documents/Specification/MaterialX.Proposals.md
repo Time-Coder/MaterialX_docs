@@ -2,6 +2,9 @@
 MaterialX 提案 v1.39
 ----->
 
+- [English](../../../docs_en/documents/Specification/MaterialX.Proposals.md)
+- [简体中文](MaterialX.Proposals.md)
+
 
 # MaterialX:拟议的添加和更改
 
