@@ -251,7 +251,7 @@ GeomProp 元素具有以下属性:
 
 Token 元素可以在 &lt;geominfo> 元素中使用,以定义与特定几何体关联的常量(通常是字符串或整数)命名值。这些几何体 token 值可以被替换到图像节点中的文件名中;参见上面的 [**其他文件名替换**](#additional-filename-substitutions) 部分以获取详细信息:
 
-``xml
+```xml
   <token name="tokenname" type="tokentype" value="value"/>
 ```
 
@@ -357,7 +357,7 @@ Looks 可以通过包含 `inherit` 属性继承另一个 look 的分配。然后
 
 可以将多个 looks 分组到一个 **LookGroup**,例如以指示哪些 looks 定义了特定资产:
 
-``xml
+```xml
   <lookgroup name="lookgroupname" looks="look1[,look2[,look3...]]" [default="lookname"]/>
 ```
 
@@ -461,7 +461,7 @@ Visibility 元素具有以下属性:
 
 PropertyAssign 和 PropertySetAssign 元素在 &lt;look> 中使用,将指定的属性值或属性集连接到一个或多个几何体或集合。
 
-``xml
+```xml
   <propertyassign name="paname" property="propertyname" type="type" value="value"
                  [target="target"]
                  [geom="geomexpr1[,geomexpr2...]"] [collection="collectionname"]/>
