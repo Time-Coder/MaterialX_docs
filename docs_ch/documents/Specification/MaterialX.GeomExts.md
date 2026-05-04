@@ -117,7 +117,7 @@ MaterialX 文件中的某些元素支持通过表达式进行几何体规范。M
 
 一个 **&lt;collection>** 元素包含要包含的几何表达式和/或集合列表,以及可选的要排除的几何表达式列表:
 
-``xml
+```xml
   <collection name="collectionname" [includegeom="geomexpr1[,geomexpr2]..."]
              [includecollection="collectionname1[,collectionname2]..."]
              [excludegeom="geomexpr3[,geomexpr4]..."]/>
@@ -136,7 +136,7 @@ MaterialX 文件中的某些元素支持通过表达式进行几何体规范。M
 因此,以下 MTLX 文件片段是等效的:
 
 
-``xml
+```xml
   <materialx>
     <collection name="c_plastic" includegeom="/a/b/g1, /a/b/g2, /a/b/g5, /a/b/c/d/g6"/>
   </materialx>
@@ -184,7 +184,7 @@ geominfo 元素最常见的用途是定义映射到几何体的纹理贴图图�
 
 一个 **&lt;geominfo>** 元素包含一个或多个几何属性和/或 token 定义,并将它们及其值与 &lt;geominfo> 元素的 `geom` 或 `collection` 属性中列出的所有几何体关联:
 
-``xml
+```xml
   <geominfo name="name" [geom="geomexpr1,geomexpr2,geomexpr3"] [collection="coll"]>
     ...geometry property and token value definitions...
   </geominfo>
@@ -208,7 +208,7 @@ GeomInfo 元素的属性:
 
 MaterialX 几何扩展在此基础上允许使用 &lt;geomprop> 元素定义特定几何体的几何属性的特定统一值,而不是依赖于这些值在外部定义。这可能包括应用程序特定的元数据、从照明包传递给渲染器的属性或其他几何体特定数据。geomprop 可能还会指定 `unittype` 和 `unit` (如果适用)以指示几何属性的值的单位;参见主 MaterialX 规范中的 [**单位** 部分](./MaterialX.Specification.md#units),尽管通常 &lt;geompropdef> 会定义 `unittype` 和 `unit`,而 geomprop 只会提供覆盖默认单位的 `unit`。
 
-``xml
+```xml
     <geomprop name="propname" type="proptype" value="value"/>
 ```
 
@@ -224,7 +224,7 @@ GeomProp 元素具有以下属性:
 
 例如,可以为几何体指定一个唯一的表面 ID 值:
 
-``xml
+```xml
   <geompropdef name="surfid" type="integer"/>
   <geominfo name="gi1" geom="/a/g1">
     <geomprop name="surfid" type="integer" value="15"/>
@@ -233,13 +233,13 @@ GeomProp 元素具有以下属性:
 
 可以使用 `<geompropvalue>` 节点从节点图中访问 geomprop 值:
 
-``xml
+```xml
   <geompropvalue name="srfidval1" type="integer" geomprop="surfid" default="0">
 ```
 
 一个 &lt;geomprop> 也可以用于定义几何体指定的 &lt;geominfo> 的内在变化几何属性(例如 "geomcolor")的默认值,如果当前几何体本身没有为该属性定义值,则相应的几何节点(例如 &lt;geomcolor>)将返回该默认值。
 
-``xml
+```xml
   <geominfo name="gi2" geom="/a/g2">
     <geomprop name="geomcolor" type="color3" value="0.5, 0, 0"/>
   </geominfo>
@@ -265,7 +265,7 @@ Token 元素具有以下属性:
 
 例如,可以为几何体指定一个纹理标识符值:
 
-``xml
+```xml
   <geominfo name="gi1" geom="/a/g1">
     <token name="txtid" type="string" value="Lengine"/>
   </geominfo>
@@ -273,7 +273,7 @@ Token 元素具有以下属性:
 
 然后可以在文件名中引用该 token 的值:
 
-``xml
+```xml
   <image name="cc1" type="color3">
     <input name="file" type="filename"
         value="txt/color/asset.color.<txtid>.tif"/>
@@ -287,7 +287,7 @@ Token 元素具有以下属性:
 
 TokenDefault 元素定义指定几何体 token 名称的默认值;如果当前几何体没有定义显式的 token 值,则此默认值将在文件名字符串替换中使用。由于 TokenDefault 不适用于任何特定的几何体,因此必须在 &lt;geominfo> 元素之外使用。
 
-``xml
+```xml
   <tokendefault name="diffmap" type="string" value="color1"/>
 ```
 
@@ -296,7 +296,7 @@ TokenDefault 元素定义指定几何体 token 名称的默认值;如果当前�
 
 涉及基于 u,v 坐标隐式计算的纹理文件名(例如 &lt;UDIM> 和 &lt;UVTILE>)的工作流程可以通过显式列出任何给定几何体的它们解析的值来变得更高效。MaterialX 规范为这一目的保留了两个 geomprop 名称,`udimset` 和 `uvtileset`,每个都是包含逗号分隔的 UDIM 或 UVTILE 值的 stringarray:
 
-``xml
+```xml
   <geominfo name="gi4" geom="/a/g1,/a/g2">
     <geomprop name="udimset" type="stringarray" value="1002,1003,1012,1013"/>
   </geominfo>
@@ -322,7 +322,7 @@ TokenDefault 元素定义指定几何体 token 名称的默认值;如果当前�
 
 一个 **&lt;property>** 元素定义了几何体的特定 look 的非材质属性的名称、类型和值;&lt;**propertyset**> 元素用于将一组 &lt;property>s 组合成一个单独的命名对象。属性或 propertysets 与特定几何体或集合之间的连接是在 &lt;look> 元素中完成的,因此这些属性可以在不同的几何体之间重用,并且可以在某些 look 中启用而在其他 look 中禁用。&lt;Property> 元素只能在 &lt;propertyset>s 中使用;它们不能独立使用,尽管可以在 &lt;look> 中使用专用的 &lt;propertyassign> 元素一次声明属性名称、类型、值和分配。
 
-``xml
+```xml
   <propertyset name="set1">
     <property name="twosided" type="boolean" value="true"/>
     <property name="trace_maxdiffusedepth" target="rmanris" type="float" value="3"/>
@@ -347,7 +347,7 @@ TokenDefault 元素定义指定几何体 token 名称的默认值;如果当前�
 
 一个 **&lt;look>** 元素包含一个或多个材质、变体、可见性和/或 propertyset 分配声明:
 
-``xml
+```xml
   <look name="lookname" [inherit="looktoinheritfrom"]>
     ...materialassign, variantassign, visibilityassign, property/propertysetassign declarations...
   </look>
@@ -377,7 +377,7 @@ Looks 可以通过包含 `inherit` 属性继承另一个 look 的分配。然后
 
 MaterialAssign 元素在 &lt;look> 中使用,将指定的材质连接到一个或多个几何体或集合(可以指定 `geom` 或 `collection`,但不能同时指定两者)。
 
-``xml
+```xml
   <materialassign name="maname" material="materialname"
                  [geom="geomexpr1[,geomexpr2...]"] [collection="collectionname"]
                  [exclusive=true|false]>
@@ -392,7 +392,7 @@ MaterialAssign 元素在 &lt;look> 中使用,将指定的材质连接到一个�
 
 VariantAssign 元素在 &lt;materialassign> 或 &lt;look> 中使用,将一个变体集中定义的值应用于一个分配的材质,或应用于 look 中的所有适用材质。
 
-``xml
+```xml
   <look name="look1">
     <variantassign name="va1" variantset="varset1" variant="var1"/>
     <materialassign name="ma1" material="material1" geom="...">
@@ -416,7 +416,7 @@ VariantAssign 元素具有以下属性:
 
 Visibility 元素在 &lt;look> 中使用,定义一个 "查看器" 对象与其他几何体之间的各种类型的泛化可见性。"查看器对象" 简单地是一个能够在某些渲染上下文中"看到"其他几何体的几何体,因此可能需要指定它在不同上下文中"看到"的几何体列表;最常见的例子是光源和主要渲染相机。
 
-``xml
+```xml
   <visibility name="vname" [viewergeom="objectname"]
              [geom="geomexpr1[,geomexpr2...]"] [collection="collectionname"]
              [vistype="visibilitytype"] [visible="false"]/>
@@ -451,7 +451,7 @@ Visibility 元素具有以下属性:
 
 对于 "secondary" vistype,`viewergeom` 应该是可渲染几何体而不是灯光,以声明某些其他几何体是否对间接反弹照明或 `viewergeom` 的反射可见。在这个例子中,"/b" 不会在反射中显示也不会对 "/a" 贡献间接反弹照明,而几何体 "/c" 不会对 _任何_ 次级射线可见:
 
-```
+```xml
   <visibility name="v2" viewergeom="/a" geom="/b" vistype="secondary" visible="false"/>
   <visibility name="v3" geom="/c" vistype="secondary" visible="false"/>
 ```
@@ -476,7 +476,7 @@ PropertyAssign 和 PropertySetAssign 元素在 &lt;look> 中使用,将指定的�
 
 此示例定义了四个集合、一个灯光着色器和材质,以及一个属性集,然后由两个 looks 使用:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <materialx>
   <!-- assume <nodedef> and <surfacematerial> elements to define Mplastic1,2 and Mmetal1,2 are placed or included here -->
