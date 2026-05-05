@@ -1,4 +1,4 @@
-# MaterialX 项目治理
+﻿# MaterialX 项目治理
 
 - [English](../docs_en/GOVERNANCE.md)
 - [简体中文](GOVERNANCE.md)

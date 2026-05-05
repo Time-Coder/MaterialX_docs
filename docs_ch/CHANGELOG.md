@@ -1,4 +1,4 @@
-# Change Log
+﻿# Change Log
 
 - [English](../docs_en/CHANGELOG.md)
 - [简体中文](CHANGELOG.md)

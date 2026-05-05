@@ -1,4 +1,4 @@
-# 为 MaterialX 做出贡献
+﻿# 为 MaterialX 做出贡献
 
 - [English](../docs_en/CONTRIBUTING.md)
 - [简体中文](CONTRIBUTING.md)

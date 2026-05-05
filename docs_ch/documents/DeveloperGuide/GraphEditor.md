@@ -1,4 +1,4 @@
-# MaterialX 图形编辑器
+﻿# MaterialX 图形编辑器
 
 - [English](../../../docs_en/documents/DeveloperGuide/GraphEditor.md)
 - [简体中文](GraphEditor.md)

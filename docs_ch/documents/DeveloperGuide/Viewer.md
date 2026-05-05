@@ -1,4 +1,4 @@
-# MaterialX 查看器
+﻿# MaterialX 查看器
 
 - [English](../../../docs_en/documents/DeveloperGuide/Viewer.md)
 - [简体中文](Viewer.md)

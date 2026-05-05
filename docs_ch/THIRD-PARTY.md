@@ -1,4 +1,4 @@
-# 第三方项目许可证
+﻿# 第三方项目许可证
 
 - [English](../docs_en/THIRD-PARTY.md)
 - [简体中文](THIRD-PARTY.md)

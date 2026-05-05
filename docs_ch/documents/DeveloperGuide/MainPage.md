@@ -1,4 +1,4 @@
-# MaterialX 概述
+﻿# MaterialX 概述
 
 - [English](../../../docs_en/documents/DeveloperGuide/MainPage.md)
 - [简体中文](MainPage.md)
