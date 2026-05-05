@@ -34,14 +34,14 @@ MaterialX 规范 v1.39 的 README
 
 **数组类型现在为统一且固定长度**
 
-许多着色语言不支持具有可变长度的动态数组类型，因此 MaterialX 现在仅支持具有固定最大长度的数组，并且所有数组类型的节点输入必须是统一的；节点不再允许输出数组类型。数组类型的输入可以伴随一个统一整数输入，声明数组中实际使用的数组元素数量(&lt；curveadjust> 节点已以这种方式更新)。由于此更改，未实现的 &lt；arrayappend> 节点已被移除。
+许多着色语言不支持具有可变长度的动态数组类型，因此 MaterialX 现在仅支持具有固定最大长度的数组，并且所有数组类型的节点输入必须是统一的；节点不再允许输出数组类型。数组类型的输入可以伴随一个统一整数输入，声明数组中实际使用的数组元素数量(&lt;curveadjust> 节点已以这种方式更新)。由于此更改，未实现的 &lt;arrayappend> 节点已被移除。
 
 
 **可连接的统一输入和新的 Tokenvalue 节点**
 
-现在明确允许将统一节点输入连接到 &lt；constant> 节点的输出。这使得定义统一值并在节点图中的多个位置使用它成为可能。
+现在明确允许将统一节点输入连接到 &lt;constant> 节点的输出。这使得定义统一值并在节点图中的多个位置使用它成为可能。
 
-类似地，材质和其他节点实例中的 &lt；token> 现在可以连接到新的 &lt；tokenvalue> 节点的输出:这本质上是一个 &lt；constant> 节点，但它连接到 &lt；token> 而不是 &lt；input>。
+类似地，材质和其他节点实例中的 &lt;token> 现在可以连接到新的 &lt;tokenvalue> 节点的输出:这本质上是一个 &lt;constant> 节点，但它连接到 &lt;token> 而不是 &lt;input>。
 
 
 **标准化的色彩空间名称**
@@ -53,19 +53,19 @@ MaterialX 中的[标准色彩空间名称](./MaterialX.Specification.md#color-sp
 
 通常，提供给节点的输入集及其类型与节点本身的输出类型相结合，足以消除应该应用哪个 nodedef 签名的歧义。在极少数情况下，如果这还不够，现在允许任何节点实例指定 nodedef 的名称，以完全消除预期节点签名的歧义。
 
-此外，&lt；nodegraph> 以前可以通过提供 "nodedef" 属性声明自己是特定 &lt；nodedef> 的实现，这仍然是建立此关联的首选方法。现在，也允许 [&lt;implementation> 元素](39/MaterialX.Specification.md#custom-node-definition-using-implementation-elements) 提供 "nodegraph" 属性，声明该 nodegraph 是 &lt；implementation> 中指定的 nodedef 的实现。这允许单个 nodegraph 成为多个 nodedef 的实现，例如两个具有相同基础实现的不同节点名称，或者如果两个版本的 nodedef 之间的唯一区别是默认值。
+此外，&lt;nodegraph> 以前可以通过提供 "nodedef" 属性声明自己是特定 &lt;nodedef> 的实现，这仍然是建立此关联的首选方法。现在，也允许 [&lt;implementation> 元素](39/MaterialX.Specification.md#custom-node-definition-using-implementation-elements) 提供 "nodegraph" 属性，声明该 nodegraph 是 &lt;implementation> 中指定的 nodedef 的实现。这允许单个 nodegraph 成为多个 nodedef 的实现，例如两个具有相同基础实现的不同节点名称，或者如果两个版本的 nodedef 之间的唯一区别是默认值。
 
 
 **移除通用 Swizzle 运算符**
 
-使用通道名称字符串并允许任意通道重新排序的标准 &lt；swizzle> 节点按照之前的规范实现效率非常低(在某些着色语言中几乎不可能)，因此已被移除。节点图应改用 &lt；extract>（现在是标准节点）、&lt;separateN> 和 &lt；combineN> 节点的组合来执行任意通道重新排序。此外，允许任意通道重新排序并使用字符串 "swizzle" 通道命名的输入的先前 "channels" 属性已被移除。
+使用通道名称字符串并允许任意通道重新排序的标准 &lt;swizzle> 节点按照之前的规范实现效率非常低(在某些着色语言中几乎不可能)，因此已被移除。节点图应改用 &lt;extract>（现在是标准节点）、&lt;separateN> 和 &lt;combineN> 节点的组合来执行任意通道重新排序。此外，允许任意通道重新排序并使用字符串 "swizzle" 通道命名的输入的先前 "channels" 属性已被移除。
 
 
 **新的无光照表面着色器和标准材质**
 
-标准库中添加了一个用于无光照表面的新 &lt；surface_unlit> 节点。
+标准库中添加了一个用于无光照表面的新 &lt;surface_unlit> 节点。
 
-此外，标准 &lt；surfacematerial> 材质现在通过添加单独的 `backsurface` 输入来支持单面或双面表面。
+此外，标准 &lt;surfacematerial> 材质现在通过添加单独的 `backsurface` 输入来支持单面或双面表面。
 
 
 **Typedef 的继承和提示**
@@ -97,15 +97,15 @@ Typedef 现在可以从其他类型(包括内置类型)继承，并可以提供�
 
 **其他更改**
 
-* 删除了描述表达式和函数曲线的 "valuerange" 和 "valuecurve" 属性，转而使用新的 &lt；curveinversecubic> / &lt;curveuniformcubic> 等节点。
-* 用于 color3/4 类型值的 &lt；geomcolor>、&lt;geompropvalue> 和 &lt；geompropvalueuniform> 节点现在可以接受 "colorspace" 属性来声明属性值的色彩空间。
-* &lt;cellnoise2d> 和 &lt；cellnoise3d> 节点现在除了 float 输出外，还支持 vector<em>N</em> 输出类型。
-* &lt;noise2d/3d>、&lt;fractal2d/3d>、&lt;cellnoise2d/3d> 和 &lt；worleynoise2d/3d> 节点现在支持 "period" 输入。
-* &lt;worleynoise2d> 和 &lt；worleynoise3d> 节点现在支持多种不同的距离度量。
+* 删除了描述表达式和函数曲线的 "valuerange" 和 "valuecurve" 属性，转而使用新的 &lt;curveinversecubic> / &lt;curveuniformcubic> 等节点。
+* 用于 color3/4 类型值的 &lt;geomcolor>、&lt;geompropvalue> 和 &lt;geompropvalueuniform> 节点现在可以接受 "colorspace" 属性来声明属性值的色彩空间。
+* &lt;cellnoise2d> 和 &lt;cellnoise3d> 节点现在除了 float 输出外，还支持 vector<em>N</em> 输出类型。
+* &lt;noise2d/3d>、&lt;fractal2d/3d>、&lt;cellnoise2d/3d> 和 &lt;worleynoise2d/3d> 节点现在支持 "period" 输入。
+* &lt;worleynoise2d> 和 &lt;worleynoise3d> 节点现在支持多种不同的距离度量。
 * &lt;time> 节点不再有 "每秒帧数" 输入:现在始终期望应用程序使用适当的方法生成 "当前时间(秒)"。删除 "fps" 输入是因为可变帧率的实时应用程序没有静态的 "fps"，而且将 fps 这样依赖于情况的值硬编码到着色网络中通常不好。
-* 现在除了 "model"、"object" 和 "world" 空间外，还定义了标准的 "tangent" 空间，并且 &lt；heighttonormal> 节点现在接受统一的 "space" 输入来定义输出法线向量的空间。
+* 现在除了 "model"、"object" 和 "world" 空间外，还定义了标准的 "tangent" 空间，并且 &lt;heighttonormal> 节点现在接受统一的 "space" 输入来定义输出法线向量的空间。
 * &lt;switch> 节点现在支持 10 个输入，而不仅仅是 5 个。
-* &lt;surface> 和 &lt；displacement> 节点现在是主规范的一部分，而不是基于物理的着色节点。
+* &lt;surface> 和 &lt;displacement> 节点现在是主规范的一部分，而不是基于物理的着色节点。
 * &lt;Token> 元素现在明确允许作为复合节点图的子元素，并且 token 值现在可以定义 enum/enumvalues。
 * &lt;nodedef> 中的输入现在可以向代码生成器提供有关其预期解释的 "hints"，例如 "transparency" 或 "opacity"。
 * &lt;Attributedef> 元素现在可以定义 enum/enumvalues 来列出属性的可接受值或标签/映射值。
@@ -114,5 +114,5 @@ Typedef 现在可以从其他类型(包括内置类型)继承，并可以提供�
 
 v1.39 的建议:
 
-* 为各种几何属性节点添加布尔 "bound" 输出，以便在给定属性不存在时材质可以灵活处理。特别是像 &lt；texcoord> 这样不允许用户指定名称的节点。
+* 为各种几何属性节点添加布尔 "bound" 输出，以便在给定属性不存在时材质可以灵活处理。特别是像 &lt;texcoord> 这样不允许用户指定名称的节点。
 

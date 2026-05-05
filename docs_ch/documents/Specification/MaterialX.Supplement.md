@@ -44,7 +44,7 @@ Jonathan Stone - Lucasfilm Advanced Development Group
 
 虽然 MaterialX 元素可以被赋予主规范中 MaterialX 名称部分所述的任何有效名称，但遵守以下推荐的命名约定将使预测 nodedef 的名称(用于 implementation 和 nodegraph 元素)变得更容易，并有助于减少来自不同来源的元素具有相同名称的可能性。
 
-**Nodedef**: "ND\__nodename_\__outputtype_[\__target_][\__version_]"，或者对于给定输出类型有多个输入类型的节点(例如 &lt；convert>),"ND\__nodename_\__inputtype_\__outputtype_[\__target_][\__version_]"。
+**Nodedef**: "ND\__nodename_\__outputtype_[\__target_][\__version_]"，或者对于给定输出类型有多个输入类型的节点(例如 &lt;convert>),"ND\__nodename_\__inputtype_\__outputtype_[\__target_][\__version_]"。
 
 **Implementation**: "IM\__nodename_[\__inputtype_]\__outputtype_[\__target_][\__version_]"。
 
@@ -55,7 +55,7 @@ Jonathan Stone - Lucasfilm Advanced Development Group
 
 # 材质和节点库文件结构
 
-随着工作室和供应商为各种目标开发共享的 MaterialX 材质和节点的定义和实现的库，为构成这些库的磁盘上的文件拥有一致、逻辑的组织结构变得有益。在本节中，我们为定义材质节点库、&lt；nodedef>、节点图实现和实际特定于目标的本地源代码的文件提出一种结构，以及应用程序和 MaterialX 内容查找和引用这些库中文件的机制。
+随着工作室和供应商为各种目标开发共享的 MaterialX 材质和节点的定义和实现的库，为构成这些库的磁盘上的文件拥有一致、逻辑的组织结构变得有益。在本节中，我们为定义材质节点库、&lt;nodedef>、节点图实现和实际特定于目标的本地源代码的文件提出一种结构，以及应用程序和 MaterialX 内容查找和引用这些库中文件的机制。
 
 文件夹层次结构中各个组成部分的图例:
 
@@ -81,11 +81,11 @@ Jonathan Stone - Lucasfilm Advanced Development Group
 3. 特定于目标 _target_ 的 _libname_ 的实现元素。
 4. 特定于目标 _target_ 的 _libname_ 实现的源代码文件。
 
-请注意，nodedef 文件和节点图实现文件位于顶层 _libname_ 级别，而 &lt；implementation> 元素文件位于相应的 _libname_/_target_ 级别下，靠近其源代码文件。这样，工作室可以轻松安装仅与他们相关的实现，应用程序可以轻松找到特定所需目标的节点实现。库可以自由添加其他任意命名的文件夹以存放相关内容，例如材质库纹理的 "images" 子文件夹。
+请注意，nodedef 文件和节点图实现文件位于顶层 _libname_ 级别，而 &lt;implementation> 元素文件位于相应的 _libname_/_target_ 级别下，靠近其源代码文件。这样，工作室可以轻松安装仅与他们相关的实现，应用程序可以轻松找到特定所需目标的节点实现。库可以自由添加其他任意命名的文件夹以存放相关内容，例如材质库纹理的 "images" 子文件夹。
 
 _libname_\_defs.mtlx 文件通常包含库的 nodedef，但也可能包含其他节点类型，如实现节点图、材质、looks 和任何其他元素类型。使用额外的 _libname_\_\*.mtlx 文件是可选的，但这些文件应由 _libname_\_defs.mtlx 文件 Xinclude。
 
-MaterialX 文档或工具引用的文件（例如 XInclude 文件、&lt；image> 或其他 MaterialX 节点中的文件名，或 MaterialX 工具中的命令行参数）可以使用相对或完全合格的绝对文件系统路径来指定。相对路径被解释为相对于引用 MaterialX 文档本身的位置，或相对于当前 MaterialX 搜索路径中找到的位置:此路径可以通过应用程序设置（例如 MaterialXView 中的 `--path` 选项）或使用 MATERIALX_SEARCH_PATH 环境变量全局指定。这些搜索路径用于 XIncluded 定义和文件名输入值（例如节点的图像或 &lt；implementation> 的源代码），如果需要，应用程序可以为不同的上下文定义不同的搜索路径，例如文档处理与渲染。
+MaterialX 文档或工具引用的文件（例如 XInclude 文件、&lt;image> 或其他 MaterialX 节点中的文件名，或 MaterialX 工具中的命令行参数）可以使用相对或完全合格的绝对文件系统路径来指定。相对路径被解释为相对于引用 MaterialX 文档本身的位置，或相对于当前 MaterialX 搜索路径中找到的位置:此路径可以通过应用程序设置（例如 MaterialXView 中的 `--path` 选项）或使用 MATERIALX_SEARCH_PATH 环境变量全局指定。这些搜索路径用于 XIncluded 定义和文件名输入值（例如节点的图像或 &lt;implementation> 的源代码），如果需要，应用程序可以为不同的上下文定义不同的搜索路径，例如文档处理与渲染。
 
 标准库 `stdlib` 和 `pbrlib` 通常由 MaterialX 应用程序_自动_包含，而不是通过 .mtlx 文件中的显式 XInclude 指令。非标准库通过 XInclude 顶层 _libname_/_libname_\_defs.mtlx 文件包含到 MaterialX 文档中，该文件预计会依次 XInclude 库所需的任何其他 .mtlx 文件。
 
@@ -108,7 +108,7 @@ MaterialX 文档或工具引用的文件（例如 XInclude 文件、&lt；image>
    <xi:include href="mtllib/mtllib_defs.mtlx"/>
 ```
 
-该文件将 XInclude `mtllib_mtls.mtlx`。`mtllib_mtls.mtlx` 中的 &lt；Image> 节点将使用诸如 "images/bronze_color.tif" 的 `file` 输入值，例如相对于 `mtllib_mtls.mtlx` 文件本身的路径。
+该文件将 XInclude `mtllib_mtls.mtlx`。`mtllib_mtls.mtlx` 中的 &lt;Image> 节点将使用诸如 "images/bronze_color.tif" 的 `file` 输入值，例如相对于 `mtllib_mtls.mtlx` 文件本身的路径。
 
 标准节点定义和参考 OSL 实现:
 
@@ -151,7 +151,7 @@ shadergen PBR 着色器库("pbrlib")的布局，具有 "genglsl" 和 "genosl"（
 
 在本节中，我们提出了一套管理唯一定义或资产并组织成库的指南，其中:
 
-* 定义:直接对应于 &lt；nodedefs>，可以是源代码实现或基于现有节点定义。
+* 定义:直接对应于 &lt;nodedefs>，可以是源代码实现或基于现有节点定义。
 * 资产:是一个术语，对应于定义加上定义的任何附加元数据和/或相关资源（如输入图像）。这些可以根据所需的语义组织成逻辑分组。
 * 库:是资产的集合。
 
@@ -160,7 +160,7 @@ shadergen PBR 着色器库("pbrlib")的布局，具有 "genglsl" 和 "genosl"（
 
 虽然可以在文档中只有一组连接的节点，但不可能有任何正式的唯一接口。这 invariably 会导致节点具有重复名称、无法控制暴露的接口以及无法随时间维护变体。
 
-因此，定义的基本要求是将节点封装到 &lt；nodegraph> 中。这提供了:
+因此，定义的基本要求是将节点封装到 &lt;nodegraph> 中。这提供了:
 
 1. 隐藏复杂性:所有节点都在图的范围内。从用户交互点来看，它使得能够根据需要"深入"到图中，但否则可以提供黑盒表示。
 2. 标识符/路径唯一性:节点图名称减少了名称冲突的机会。例如，当放入两个节点图 "bar1" 和 "bar2" 时，两个都称为 "foo" 的顶级节点将具有唯一路径 "bar1/foo" 和 "bar2/foo"。  
@@ -176,7 +176,7 @@ shadergen PBR 着色器库("pbrlib")的布局，具有 "genglsl" 和 "genosl"（
 
 ### 发布定义
 
-从 &lt；nodegraph> 可以创建（新的 &lt；nodedef>）或"发布"定义。发布允许以下重要功能:
+从 &lt;nodegraph> 可以创建（新的 &lt;nodedef>）或"发布"定义。发布允许以下重要功能:
 
 1. 重用:能够重用唯一的节点定义，而不是复制图实现。
 2. 变体:能够独立于实现创建或将变体应用于实例。
@@ -189,12 +189,12 @@ shadergen PBR 着色器库("pbrlib")的布局，具有 "genglsl" 和 "genosl"（
     * 不应使用它,因为它会导致命名空间被多次 prepend。例如,具有命名空间 "myspace" 的 "foo" 节点的唯一标识符为 "myspace:node"。如果节点命名为 "myspace:node",则 resulting 标识符为 "myspace:myspace:node"。
     * 请注意,导入文档将根据需要 prepend 命名空间而不会重复命名空间。
 3. 版本标识符:虽然这可以是通用字符串，但建议这是具有特定格式的模板，以允许已知的增量编号。例如，格式可以是 "v#.#" 以支持次要和主要版本控制。这需要将所有版本中的一个标记为默认版本。应注意确保这一点，因为找到的第一个将被用作默认值。
-4. 节点组标识符:这可以是用于定义组织或用户界面呈现的一种机制。它也在某种程度上用于着色器生成，因为它提供了节点类型的提示。例如，&lt；image> 节点位于 "texture2d" 节点组中。
+4. 节点组标识符:这可以是用于定义组织或用户界面呈现的一种机制。它也在某种程度上用于着色器生成，因为它提供了节点类型的提示。例如，&lt;image> 节点位于 "texture2d" 节点组中。
 5. 文档字符串。虽然不是严格要求，但这提供了一些能力来说明节点的作用，并可用作用户界面帮助器。目前与此没有关联的格式，但可以嵌入格式。
 
 请注意，作为核心分发的一部分提供了编纂发布逻辑的实用程序。
 
-为了支持变体，建议使用 &lt；token> 和 &lt；variant>。
+为了支持变体，建议使用 &lt;token> 和 &lt;variant>。
 
 
 

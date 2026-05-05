@@ -59,10 +59,10 @@ MaterialX 还应该支持以下色彩空间:
 
 （README.md 的摘要:**新增着色器 AOV 支持**
 
-以前，MaterialX 使用具有输出变量结构的自定义类型来定义着色器 AOV。但这种方法不太灵活，实际上尚未实现。在 v1.39 中，基于节点图的着色器实现可以包含新的 [&lt;aovoutput> 元素](./MaterialX.Specification.md#aov-output-elements) 来定义 AOV，渲染器可以使用这些 AOV 输出除最终着色结果之外的额外信息通道，而基于文件的 &lt；implementation> 同样可以使用 [&lt;aov> 元素](./MaterialX.Specification.md#implementation-aov-elements)定义 AOV。
+以前，MaterialX 使用具有输出变量结构的自定义类型来定义着色器 AOV。但这种方法不太灵活，实际上尚未实现。在 v1.39 中，基于节点图的着色器实现可以包含新的 [&lt;aovoutput> 元素](./MaterialX.Specification.md#aov-output-elements) 来定义 AOV，渲染器可以使用这些 AOV 输出除最终着色结果之外的额外信息通道，而基于文件的 &lt;implementation> 同样可以使用 [&lt;aov> 元素](./MaterialX.Specification.md#implementation-aov-elements)定义 AOV。
 ）
 
-具有 "shader" 或 "material" 语义输出类型的功能节点图可能包含多个 &lt；aovoutput> 元素来声明任意输出变量 ("AOV")，渲染器可以看到并将其作为额外的信息流输出。AOVoutputs 必须是 float、color3 或 vector3 类型（用于预着色 "pattern" 值），或 BSDF 或 EDF（用于着色器节点输出值）；期望渲染器从 BSDF 和 EDF 类型中提取适当的类颜色信息。在此功能节点图中实例化的着色器语义节点内定义的 AOV 可以通过在 &lt；aovoutput> 中提供 sourceaov 属性来 "传递" 并可能重命名（但不能以任何方式修改或操作）。
+具有 "shader" 或 "material" 语义输出类型的功能节点图可能包含多个 &lt;aovoutput> 元素来声明任意输出变量 ("AOV")，渲染器可以看到并将其作为额外的信息流输出。AOVoutputs 必须是 float、color3 或 vector3 类型（用于预着色 "pattern" 值），或 BSDF 或 EDF（用于着色器节点输出值）；期望渲染器从 BSDF 和 EDF 类型中提取适当的类颜色信息。在此功能节点图中实例化的着色器语义节点内定义的 AOV 可以通过在 &lt;aovoutput> 中提供 sourceaov 属性来 "传递" 并可能重命名（但不能以任何方式修改或操作）。
 
 ```xml
   <aovoutput name="name" type="type" aovname="aovname"
@@ -75,7 +75,7 @@ MaterialX 还应该支持以下色彩空间:
 * type (string，必需)：AOV 的类型，必须是上面列出的支持类型之一。
 * aovname (string，必需)：渲染器应用于 AOV 的名称。
 * nodename (string，必需)：其输出定义 AOV 值的节点的名称。
-* sourceaov (string，可选)：如果 nodename 是 surfaceshader 类型，则在 nodename 内定义的输出 AOV 的名称，以作为输出 AOV 传递。nodename 内定义的 sourceaov 的类型必须与 &lt；aovoutput> 类型匹配。
+* sourceaov (string，可选)：如果 nodename 是 surfaceshader 类型，则在 nodename 内定义的输出 AOV 的名称，以作为输出 AOV 传递。nodename 内定义的 sourceaov 的类型必须与 &lt;aovoutput> 类型匹配。
 
 示例:
 
@@ -88,7 +88,7 @@ MaterialX 还应该支持以下色彩空间:
 
 #### AovOutput 示例
 
-使用 sourceaov 从着色器语义节点的实例中转发 AOV 的 &lt；aovoutput> 示例；这假设 &lt；standard_surface> 本身已为 "diffuse" 和 "specular" AOV 定义了 &lt；aovoutput>:
+使用 sourceaov 从着色器语义节点的实例中转发 AOV 的 &lt;aovoutput> 示例；这假设 &lt;standard_surface> 本身已为 "diffuse" 和 "specular" AOV 定义了 &lt;aovoutput>:
 
 ```xml
   <nodegraph name="NG_basic_surface_srfshader" nodedef="ND_basic_surface_srfshader">
@@ -119,13 +119,13 @@ MaterialX 还应该支持以下色彩空间:
 
 分层着色器或材质必须在将 AOV 类似值作为 AOV 输出之前内部处理来自源层的混合:目前没有用于混合在后着色混合 surfaceshaders 中定义的 AOV 的工具。
 
-注意:虽然在语法上可以为在节点图中访问的几何图元值（如着色表面点和法线）创建 &lt；aovoutput>，但更希望渲染器直接从其内部着色状态或几何 primvars 派生此类信息。
+注意:虽然在语法上可以为在节点图中访问的几何图元值（如着色表面点和法线）创建 &lt;aovoutput>，但更希望渲染器直接从其内部着色状态或几何 primvars 派生此类信息。
 
 
 
 #### Implementation AOV 元素
 
-具有定义表面着色器的外部编译实现的 file 属性的 &lt；implementation> 元素可以包含一个或多个 &lt；aov> 元素来声明着色器可以输出到渲染器的任意输出变量("AOV")的名称和类型。AOV 必须是 float、color3、vector3、BSDF 或 EDF 类型。请注意，在 MaterialX 中，预着色 "pattern" 颜色的 AOV 通常是 color3 类型，而后着色的类颜色值通常是 BSDF 类型，发射类颜色值通常是 EDF 类型。具有 `nodegraph` 属性的 &lt；implementation> 不能包含 &lt；aov> 元素；相反，应使用节点图中的 &lt；aovoutput> 元素。
+具有定义表面着色器的外部编译实现的 file 属性的 &lt;implementation> 元素可以包含一个或多个 &lt;aov> 元素来声明着色器可以输出到渲染器的任意输出变量("AOV")的名称和类型。AOV 必须是 float、color3、vector3、BSDF 或 EDF 类型。请注意，在 MaterialX 中，预着色 "pattern" 颜色的 AOV 通常是 color3 类型，而后着色的类颜色值通常是 BSDF 类型，发射类颜色值通常是 EDF 类型。具有 `nodegraph` 属性的 &lt;implementation> 不能包含 &lt;aov> 元素；相反，应使用节点图中的 &lt;aovoutput> 元素。
 
 ```xml
   <implementation name="IM_basicsurface_surface_rmanris"
@@ -170,7 +170,7 @@ MaterialX 还应该支持以下色彩空间:
 <a id="node-tokenvalue"> </a>
 
 ### `tokenvalue`
-常量 "interface token" 值，只能连接到节点中的 &lt；token>，不能连接到 &lt；input>。
+常量 "interface token" 值，只能连接到节点中的 &lt;token>，不能连接到 &lt;input>。
 
 |端口   |描述                         |类型            |默认值  |
 |-------|----------------------------|----------------|---------|

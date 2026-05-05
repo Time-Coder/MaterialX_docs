@@ -184,7 +184,7 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
     color4value = "0.1,0.2,0.3,1.0"
 ```
 
-注意：所有 color3 值和 color4 值的 RGB 分量都假定在封闭的 &lt；materialx&gt； 元素中定义的“工作色彩空间”中指定，尽管文档中的任何元素都可以提供 `colorspace` 属性，明确声明其范围内颜色值应解释的空间；实现应在使用这些值执行计算之前将这些颜色值转换为工作色彩空间。请参阅下面的 [色彩空间和色彩管理系统](#color-spaces-and-color-management-systems) 部分。
+注意：所有 color3 值和 color4 值的 RGB 分量都假定在封闭的 &lt;materialx&gt； 元素中定义的“工作色彩空间”中指定，尽管文档中的任何元素都可以提供 `colorspace` 属性，明确声明其范围内颜色值应解释的空间；实现应在使用这些值执行计算之前将这些颜色值转换为工作色彩空间。请参阅下面的 [色彩空间和色彩管理系统](#color-spaces-and-color-management-systems) 部分。
 
 **向量(Vector)** 类型：与颜色类似，MaterialX 支持三种不同的向量类型:
 
@@ -241,17 +241,17 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
 
 ## 自定义数据类型
 
-除了标准数据类型外，MaterialX 还支持为着色器和自定义节点的输入和输出指定自定义数据类型。这允许文档描述应用程序可能需要的任何复杂类型的数据流；示例可能包括光谱颜色样本或复合几何数据。可以使用多个 &lt；member&gt； 元素描述自定义类型内容的结构，但也只声明自定义类型的名称并将该类型视为“盲数据”。
+除了标准数据类型外，MaterialX 还支持为着色器和自定义节点的输入和输出指定自定义数据类型。这允许文档描述应用程序可能需要的任何复杂类型的数据流；示例可能包括光谱颜色样本或复合几何数据。可以使用多个 &lt;member&gt； 元素描述自定义类型内容的结构，但也只声明自定义类型的名称并将该类型视为“盲数据”。
 
 可以声明类型具有特定的语义，这可用于确定应如何解释该类型的值，以及如何连接输出该类型的节点。目前，MaterialX 定义了三种语义：
 
 * `color`： 该类型被解释为代表或包含颜色，因此应按照 [色彩空间和色彩管理系统](#color-spaces-and-color-management-systems) 部分所述进行色彩管理。
 * `shader`： 该类型被解释为着色器输出类型；输出具有 "shader" 语义的类型的节点或节点图可用于定义着色器类型节点，该节点可以连接到 "material" 类型节点的输入。
-* `material`： 该类型被解释为材质输出类型；输出具有 "material" 语义的类型的节点或节点图可以在 &lt；look&gt； 中由 &lt；materialassign&gt； 引用。
+* `material`： 该类型被解释为材质输出类型；输出具有 "material" 语义的类型的节点或节点图可以在 &lt;look&gt； 中由 &lt;materialassign&gt； 引用。
 
 未定义特定语义的类型假定具有 semantic="default"。
 
-使用 &lt；typedef&gt； 元素定义自定义类型:
+使用 &lt;typedef&gt； 元素定义自定义类型:
 
 ```xml
   <typedef name="spectrum" semantic="color"/>
@@ -274,7 +274,7 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
 &lt;member&gt； 元素的属性:
 
 * `name` (string， 必需)： 成员变量的名称。在此自定义类型的其他成员名称列表中必须唯一。
-* `type` (string， 必需)： 成员变量的类型；可以是任何内置 MaterialX 类型，或任何先前定义的自定义类型；不支持 &lt；member&gt； 类型的递归包含。
+* `type` (string， 必需)： 成员变量的类型；可以是任何内置 MaterialX 类型，或任何先前定义的自定义类型；不支持 &lt;member&gt； 类型的递归包含。
 * `value` (string， 必需)： 成员变量的默认值。
 
 如果提供了多个 <member> 元素，则 MaterialX 文件可以在使用该类型的任何地方指定该类型的值，作为大括号包围、分号分隔的数字和字符串列表，期望分号之间的数字和字符串按顺序与预期的 <member> 类型完全对应。使用大括号允许嵌套自定义结构类型初始化器。例如，如果声明了以下 <typedef>:
@@ -297,7 +297,7 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
 
 如果未提供 <member> 子元素，例如如果自定义类型的内容不能表示为 MaterialX 类型列表，则无法提供值，并且此类型只能用于将盲数据从一个自定义节点的输出传递到另一个自定义节点或着色器输入。
 
-一旦由 &lt；typedef&gt； 定义了自定义类型，就可以在任何允许"任何 MaterialX 类型"的 MaterialX 元素中使用它；MaterialX 类型列表实际上被扩展为包含新的自定义类型。然而，应该注意的是，&lt；typedef&gt； 只是声明类型的存在以及可能关于其预期定义的一些提示，但由每个应用程序和代码生成器为任何类型提供其自己的精确定义。
+一旦由 &lt;typedef&gt； 定义了自定义类型，就可以在任何允许"任何 MaterialX 类型"的 MaterialX 元素中使用它；MaterialX 类型列表实际上被扩展为包含新的自定义类型。然而，应该注意的是，&lt;typedef&gt； 只是声明类型的存在以及可能关于其预期定义的一些提示，但由每个应用程序和代码生成器为任何类型提供其自己的精确定义。
 
 标准 MaterialX 发行版包括四种 "shader" 语义数据类型的定义:**surfaceshader**、**displacementshader**、**volumeshader** 和 **lightshader**。这些类型将在下面的 [着色器节点](#shader-nodes) 部分更详细地讨论。
 
@@ -314,9 +314,9 @@ MTLX 文件（文件扩展名为 ".mtlx"）具有以下一般形式:
   </materialx>
 ```
 
-即，标准的 XML 声明行后跟根 &lt；materialx&gt； 元素，其中包含任意数量的 MaterialX 元素和子元素。MTLX 文件的默认字符编码为 UTF-8,MaterialX 实现中字符串值的内存表示也期望使用此编码。
+即，标准的 XML 声明行后跟根 &lt;materialx&gt； 元素，其中包含任意数量的 MaterialX 元素和子元素。MTLX 文件的默认字符编码为 UTF-8,MaterialX 实现中字符串值的内存表示也期望使用此编码。
 
-支持标准 XML XInclude ([http://en/wikipedia.org/wiki/XInclude](http://en/wikipedia.org/wiki/Xinclude))，以及标准 XML 注释和 XML 字符实体 `&quot;`、`&amp;`、`&apos;`、`&lt；` 和 `&gt;`:
+支持标准 XML XInclude ([http://en/wikipedia.org/wiki/XInclude](http://en/wikipedia.org/wiki/Xinclude))，以及标准 XML 注释和 XML 字符实体 `&quot;`、`&amp;`、`&apos;`、`&lt;` 和 `&gt;`:
 
 ```xml
   <xi:include href="includedfile.mtlx"/>
@@ -332,7 +332,7 @@ MTLX 文件（文件扩展名为 ".mtlx"）具有以下一般形式:
 
 * `version`（string，必需）： 包含此文档符合的 MaterialX 规范版本号的字符串，指定为由点分隔的主版本号和次版本号。MaterialX 库在加载时自动将旧版本文档升级到当前 MaterialX 版本。
 * `colorspace`（string，可选）： 此元素及其所有后代的"工作色彩空间"的名称。这是所有图像输入和颜色值的默认色彩空间，也是执行所有颜色计算的色彩空间。默认为 "none"，表示不进行色彩管理。
-* `namespace`（string，可选）： 定义在此 &lt；materialx&gt； 范围内定义的所有元素的命名空间。详情请参阅下面的 [MaterialX 命名空间](#materialx-namespaces) 部分。
+* `namespace`（string，可选）： 定义在此 &lt;materialx&gt； 范围内定义的所有元素的命名空间。详情请参阅下面的 [MaterialX 命名空间](#materialx-namespaces) 部分。
 
 
 
@@ -356,9 +356,9 @@ MaterialX 支持使用色彩管理系统将 RGB 颜色和图像与特定色彩�
 * `srgb_displayp3`
 * `lin_displayp3`
 
-MaterialX 文档的工作色彩空间由其根 &lt；materialx&gt； 元素的 `colorspace` 属性定义，强烈建议所有 &lt；materialx&gt； 元素如果希望使用色彩管理工作流程而不是依赖外部配置文件的默认色彩空间设置，则定义特定的 `colorspace`。如果 MaterialX 文档被 xi:included 到另一个 MaterialX 文档中，它将继承父文档的工作色彩空间设置，除非它自己声明了特定的工作色彩空间。
+MaterialX 文档的工作色彩空间由其根 &lt;materialx&gt； 元素的 `colorspace` 属性定义，强烈建议所有 &lt;materialx&gt； 元素如果希望使用色彩管理工作流程而不是依赖外部配置文件的默认色彩空间设置，则定义特定的 `colorspace`。如果 MaterialX 文档被 xi:included 到另一个 MaterialX 文档中，它将继承父文档的工作色彩空间设置，除非它自己声明了特定的工作色彩空间。
 
-单个颜色图像文件和值的色彩空间可以通过定义文件名或值的输入中的 `colorspace` 属性来定义。其他元素（如 &lt；nodegraph&gt； 或节点实例）允许定义将应用于其范围内元素的 `colorspace` 属性；未显式提供 `colorspace` 属性的输入和文件中的颜色值将被视为处于定义 `colorspace` 属性的最近封闭范围的色彩空间中。非工作色彩空间中的颜色图像和值应在执行计算之前由应用程序转换为工作空间。在下面的示例中，图像文件已在 "srgb_texture" 色彩空间中定义，而其默认值已在 "lin_rec709" 中定义；两者都应在应用于任何计算之前转换为应用程序的工作色彩空间。
+单个颜色图像文件和值的色彩空间可以通过定义文件名或值的输入中的 `colorspace` 属性来定义。其他元素（如 &lt;nodegraph&gt； 或节点实例）允许定义将应用于其范围内元素的 `colorspace` 属性；未显式提供 `colorspace` 属性的输入和文件中的颜色值将被视为处于定义 `colorspace` 属性的最近封闭范围的色彩空间中。非工作色彩空间中的颜色图像和值应在执行计算之前由应用程序转换为工作空间。在下面的示例中，图像文件已在 "srgb_texture" 色彩空间中定义，而其默认值已在 "lin_rec709" 中定义；两者都应在应用于任何计算之前转换为应用程序的工作色彩空间。
 
 ```xml
   <image name="in1" type="color3">
@@ -377,7 +377,7 @@ MaterialX 保留色彩空间名称 "none" 表示不应对其范围内的图像�
 
 MaterialX 允许根据特定单位和单位类型定义浮点和向量值，并可以自动将值从其指定单位转换为应用程序指定的同类型场景单位。这允许图像及其表示的量（如位移量）以绝对真实世界大小指定，然后自动转换为应用程序预期的场景单位。
 
-单元类型使用 &lt；unittypedef&gt； 元素定义，该类型的一组单位使用具有一个或多个子 &lt；unit&gt； 元素的 &lt；unitdef&gt； 元素定义。MaterialX 预定义了以下单元类型和单位:
+单元类型使用 &lt;unittypedef&gt； 元素定义，该类型的一组单位使用具有一个或多个子 &lt;unit&gt； 元素的 &lt;unitdef&gt； 元素定义。MaterialX 预定义了以下单元类型和单位:
 
 
 
@@ -385,7 +385,7 @@ MaterialX 允许根据特定单位和单位类型定义浮点和向量值，并�
 
 MaterialX 允许根据特定单位和单位类型定义浮点和向量值，并可以自动将值从其指定单位转换为应用程序指定的同类型场景单位。这允许图像及其表示的量（如位移量）以绝对真实世界大小指定，然后自动转换为应用程序预期的场景单位。
 
-单元类型使用 &lt；unittypedef&gt； 元素定义，该类型的一组单位使用具有一个或多个子 &lt；unit&gt； 元素的 &lt；unitdef&gt； 元素定义。MaterialX 预定义了以下单元类型和单位:
+单元类型使用 &lt;unittypedef&gt； 元素定义，该类型的一组单位使用具有一个或多个子 &lt;unit&gt； 元素的 &lt;unitdef&gt； 元素定义。MaterialX 预定义了以下单元类型和单位:
 
 ```xml
   <unittypedef name="distance"/>
@@ -408,7 +408,7 @@ MaterialX 允许根据特定单位和单位类型定义浮点和向量值，并�
   </unitdef>
 ```
 
-&lt;unittypedef> 定义单位名称，而 &lt；unitdef> 为单元类型定义任意数量的单位以及相对于其他单位的乘法转换 `scale` 值。可以通过提供具有相同 `unittype` 属性值的另一个 &lt；unitdef> 来完成任何单元类型的其他单位定义。
+&lt;unittypedef> 定义单位名称，而 &lt;unitdef> 为单元类型定义任意数量的单位以及相对于其他单位的乘法转换 `scale` 值。可以通过提供具有相同 `unittype` 属性值的另一个 &lt;unitdef> 来完成任何单元类型的其他单位定义。
 
 任何输入或其他浮点值都可以指定 `unit` 和/或 `unittype` 属性，具体遵循本文档中澄清的准则。单位和单元类型也可以用于 floatarray、vector<em>N</em> 和 vector<em>N</em>array 量，其中向量的所有分量或数组中的所有值都使用相同的单位，以及 "filename" 类型输入，在这种情况下，`unit` 和/或 `unittype` 属性适用于从这些文件读取的 float 或 vector<em>N</em> 值。并不期望所有输入都有定义的单位或单元类型；事实上，预计绝大多数输入既没有单位也没有单元类型。只有在特定单位很重要且合理预期可能需要进行单位转换的情况下，才应指定单位和单元类型。
 
@@ -418,7 +418,7 @@ MaterialX 允许根据特定单位和单位类型定义浮点和向量值，并�
 
 ## MaterialX 命名空间
 
-MaterialX 支持指定“命名空间”，它们限定其范围内所有元素的 MaterialX 名称。命名空间通过 &lt；materialx> 元素中的 `namespace` 属性指定，其他 &lt；xi:include> 此 .mtlx 文件的 MaterialX 文件可以引用其内容而无需担心元素或对象命名冲突，类似于在各种编程语言中使用命名空间的方式。允许多个 &lt；materialx> 元素指定相同的命名空间；每个元素的元素将简单地合并到同一个命名空间中。未指定命名空间的 &lt；materialx> 元素将把元素定义到（未命名的）全局命名空间中。MaterialX 命名空间最常用于定义自定义节点（nodedefs）族、材质库或常用的网络着色器或节点图。
+MaterialX 支持指定“命名空间”，它们限定其范围内所有元素的 MaterialX 名称。命名空间通过 &lt;materialx> 元素中的 `namespace` 属性指定，其他 &lt;xi:include> 此 .mtlx 文件的 MaterialX 文件可以引用其内容而无需担心元素或对象命名冲突，类似于在各种编程语言中使用命名空间的方式。允许多个 &lt;materialx> 元素指定相同的命名空间；每个元素的元素将简单地合并到同一个命名空间中。未指定命名空间的 &lt;materialx> 元素将把元素定义到（未命名的）全局命名空间中。MaterialX 命名空间最常用于定义自定义节点（nodedefs）族、材质库或常用的网络着色器或节点图。
 
 对不同命名空间中元素的引用使用语法 "_namespace_:_elementname_" 进行限定，其中 _namespace_ 是被引用元素范围内的命名空间，_elementname_ 是被引用元素的名称。对同一命名空间中的元素或全局命名空间中的元素的引用不应被限定。
 
@@ -458,7 +458,7 @@ Mtllib.mtlx 包含以下内容（假设 "..." 包含任何必要的材质输入�
     </site_ops:mynoise>
 ```
 
-`namespace` 属性也可以添加到单个 &lt；nodedef> 或 &lt；nodegraph>，在这种情况下，&lt；nodedef> 的 `name` 和 `node`，或者只是 &lt；nodegraph> 的 `name` 将被分配到指定的 `namespace`。在 &lt；nodegraph> 中，如果它引用的 &lt；nodedef> 是在特定命名空间中定义的，则 `nodedef` 必须包含命名空间引用，即使它与 &lt；nodegraph> 的命名空间相同:这是因为 `namespace` 仅适用于由元素创建或包含在元素内的内容，而不适用于该元素引用的任何外部内容。
+`namespace` 属性也可以添加到单个 &lt;nodedef> 或 &lt;nodegraph>，在这种情况下，&lt;nodedef> 的 `name` 和 `node`，或者只是 &lt;nodegraph> 的 `name` 将被分配到指定的 `namespace`。在 &lt;nodegraph> 中，如果它引用的 &lt;nodedef> 是在特定命名空间中定义的，则 `nodedef` 必须包含命名空间引用，即使它与 &lt;nodegraph> 的命名空间相同:这是因为 `namespace` 仅适用于由元素创建或包含在元素内的内容，而不适用于该元素引用的任何外部内容。
 
 ```xml
   <nodedef name="ND_myshader" node="myshader" namespace="mynamespace">
@@ -494,7 +494,7 @@ Mtllib.mtlx 包含以下内容（假设 "..." 包含任何必要的材质输入�
 | Bworld | vector3 | 世界空间副切线向量（索引 0） |
 | UV0 | vector2 | 索引 "0" UV 纹理坐标 |
 
-也可以使用 &lt；geompropdef> 元素定义自定义几何属性:
+也可以使用 &lt;geompropdef> 元素定义自定义几何属性:
 
 ```xml
   <geompropdef name="geompropname" type="geomproptype" [uniform="true|false"]
@@ -516,7 +516,7 @@ geomprop 的 `type` 可以是任何非数组 MaterialX 类型,尽管 `string` �
   <nodedef name="ND1" ... internalgeomprops="position, Pworld, normal, uv1">
 ```
 
-geompropdef 还可以指定 `unittype` 和 `unit` 以指示几何属性是用特定单位定义的。如果使用 &lt；geompropvalue> 在节点图中访问具有定义单位的 geomprop，则几何属性值将从 geompropdef 指定的单位转换为应用程序指定的场景单位。
+geompropdef 还可以指定 `unittype` 和 `unit` 以指示几何属性是用特定单位定义的。如果使用 &lt;geompropvalue> 在节点图中访问具有定义单位的 geomprop，则几何属性值将从 geompropdef 指定的单位转换为应用程序指定的场景单位。
 
 ```xml
   <geompropdef name="objheight" type="float" unittype="distance" unit="meter"/>
@@ -568,19 +568,19 @@ geompropdef 还可以指定 `unittype` 和 `unit` 以指示几何属性是用特
 
 ## 文件名替换
 
-各种节点的文件名输入值可以包含一个或多个特殊字符串，它们将如下表所述进行替换。&lt；>' 内的替换字符串来自当前几何体，[]' 内的字符串来自 MaterialX 状态，{}' 内的字符串来自主机应用程序环境。
+各种节点的文件名输入值可以包含一个或多个特殊字符串，它们将如下表所述进行替换。&lt;>' 内的替换字符串来自当前几何体，[]' 内的字符串来自 MaterialX 状态，{}' 内的字符串来自主机应用程序环境。
 
 | Token | 描述 |
 | ---- | ---- |
 | &lt;UDIM> | 一种特殊的几何令牌，将在渲染或评估时根据当前点的 uv 值替换为计算出的四位 Mari 风格 "udim" 值，使用公式 UDIM = 1001 + U + V*10，其中 U 是 u 坐标的整数部分，V 是 v 坐标的整数部分。 |
 | &lt;UVTILE> | 一种特殊的几何令牌，将替换为计算的 Mudbox 风格 "u<em>U</em>_v<em>V</em>" 字符串，其中 <em>U</em> 是 1+ u 坐标的整数部分，<em>V</em> 是 1+ v 坐标的整数部分。 |
-| [<em>interface token</em>] | 在包含节点图的 &lt；nodedef> 接口中声明的指定令牌的值；令牌的值可以在引用该节点的材质中的着色器节点内或在 &lt；variant> 中设置；如果为当前几何体在多个位置定义了相同的令牌，则会出错。 |
+| [<em>interface token</em>] | 在包含节点图的 &lt;nodedef> 接口中声明的指定令牌的值；令牌的值可以在引用该节点的材质中的着色器节点内或在 &lt;variant> 中设置；如果为当前几何体在多个位置定义了相同的令牌，则会出错。 |
 | {<em>hostattr</em>} | 主机应用程序可以定义其他变量，这些变量可以在文件名中解析。 |
 | {frame} | 一种特殊字符串，将由主机环境定义的当前帧号替换。 |
 | {0<em>N</em>frame} | 一种特殊字符串，将由当前帧号替换，填充零以达到总共 <em>N</em> 位数字（将 <em>N</em> 替换为数字）：例如，{04frame} 将被替换为 4 位零填充帧号，如 "0010"。 |
 
 
-注意:预计实现将在导出时保留文件名中的替换字符串，而不是将它们 "烘焙" 为完全评估的文件名。使用 USD 进行几何体和分配的应用程序还可以使用 &lt；_geometry token_> （又称 "&lt;_primvarname_>"） 作为整个文件名字符串来访问不变的整个字符串 primvar 值（尽管该字符串值可能包含 USD 支持的 &lt；UDIM> 令牌）。
+注意:预计实现将在导出时保留文件名中的替换字符串，而不是将它们 "烘焙" 为完全评估的文件名。使用 USD 进行几何体和分配的应用程序还可以使用 &lt;_geometry token_> （又称 "&lt;_primvarname_>"） 作为整个文件名字符串来访问不变的整个字符串 primvar 值（尽管该字符串值可能包含 USD 支持的 &lt;UDIM> 令牌）。
 
 <br>
 
@@ -599,7 +599,7 @@ geompropdef 还可以指定 `unittype` 和 `unit` 以指示几何属性是用特
   </nodecategory>
 ```
 
-其中 _nodecategory_ 是节点的常规“类别”（例如 "image"、"add" 或 "mix"),`name`（字符串，必需）定义此节点实例的名称，该名称在其出现的范围内必须是唯一的，`type`（字符串，必需）指定该节点输出的 MaterialX 类型（通常是 float、color<em>N</em> 或 vector<em>N</em>）。如果应用程序在用户界面中为此节点实例使用不同的名称，则可以向 &lt；_nodecategory_> 元素添加 `uiname` 属性以指示节点向用户显示的名称。
+其中 _nodecategory_ 是节点的常规“类别”（例如 "image"、"add" 或 "mix"),`name`（字符串，必需）定义此节点实例的名称，该名称在其出现的范围内必须是唯一的，`type`（字符串，必需）指定该节点输出的 MaterialX 类型（通常是 float、color<em>N</em> 或 vector<em>N</em>）。如果应用程序在用户界面中为此节点实例使用不同的名称，则可以向 &lt;_nodecategory_> 元素添加 `uiname` 属性以指示节点向用户显示的名称。
 
 节点元素可以选择指定 "_major_[._minor_]" 格式的 `version` 字符串属性，请求使用该节点定义的特定版本而不是默认版本。通常，节点输入和输出的类型足以消除适用版本的哪个签名是预期的歧义，但如果有必要，节点实例化也可以声明特定的 nodedef 名称以精确定义所需的节点签名。请参阅下面的 [自定义节点声明 NodeDef 元素](#custom-node-declaration-nodedef-elements) 部分以获取更多详细信息。
 
@@ -609,7 +609,7 @@ MaterialX 定义了许多 [标准节点](#standard-nodes)，所有实现都应�
 
 ## 输入
 
-节点元素包含零个或多个 &lt；input> 元素，定义每个节点输入的名称、类型和值或连接。输入元素可以通过提供 `value` 属性分配显式统一值，通过提供 `nodename` 属性连接到另一个节点的输出，或通过提供 `nodegraph` 属性连接到节点图的输出。还可以为 &lt；input> 元素提供可选的 `output` 属性，允许输入连接到引用的上游节点或节点图的特定命名输出。如果引用的节点/节点图有多个输出，则需要 `output`；如果它只有一个输出，则 &lt；input> 的 `output` 属性将被忽略。输入元素可以定义为只接受统一值，在这种情况下，输入可以提供 `value` 或 `nodename` 连接到 [&lt;constant> 节点](./MaterialX.StandardNodes.md#node-constant) 的输出（可能通过一个或多个无操作 [&lt;dot> 节点](./MaterialX.StandardNodes.md#node-dot)）或任何其他输出明确声明为 "uniform" 的节点，但不能提供 `nodename` 或 `nodegraph` 连接到任何任意节点输出或任何节点图输出。字符串和文件名类型的输入必须是 "uniform"，任何数组类型的输入也是如此。输入元素可以连接到节点定义中的外部参数接口，允许它们从材质或节点实例分配值；这包括 "uniform" 和字符串/文件名类型的输入，但是，上面列出的相同可连接性限制适用于材质或节点实例的输入。输入只能连接到相同类型的节点/节点图输出或 nodedef 接口输入，尽管允许将 `string` 类型输出连接到 `filename` 类型输入（但反之亦然）。
+节点元素包含零个或多个 &lt;input> 元素，定义每个节点输入的名称、类型和值或连接。输入元素可以通过提供 `value` 属性分配显式统一值，通过提供 `nodename` 属性连接到另一个节点的输出，或通过提供 `nodegraph` 属性连接到节点图的输出。还可以为 &lt;input> 元素提供可选的 `output` 属性，允许输入连接到引用的上游节点或节点图的特定命名输出。如果引用的节点/节点图有多个输出，则需要 `output`；如果它只有一个输出，则 &lt;input> 的 `output` 属性将被忽略。输入元素可以定义为只接受统一值，在这种情况下，输入可以提供 `value` 或 `nodename` 连接到 [&lt;constant> 节点](./MaterialX.StandardNodes.md#node-constant) 的输出（可能通过一个或多个无操作 [&lt;dot> 节点](./MaterialX.StandardNodes.md#node-dot)）或任何其他输出明确声明为 "uniform" 的节点，但不能提供 `nodename` 或 `nodegraph` 连接到任何任意节点输出或任何节点图输出。字符串和文件名类型的输入必须是 "uniform"，任何数组类型的输入也是如此。输入元素可以连接到节点定义中的外部参数接口，允许它们从材质或节点实例分配值；这包括 "uniform" 和字符串/文件名类型的输入，但是，上面列出的相同可连接性限制适用于材质或节点实例的输入。输入只能连接到相同类型的节点/节点图输出或 nodedef 接口输入，尽管允许将 `string` 类型输出连接到 `filename` 类型输入（但反之亦然）。
 
 节点的 float/vector<em>N</em> 输入或引用包含 float 或 vector<em>N</em> 值的图像文件的 "filename" 类型输入可以通过提供 `unit` 属性为其值指定单位，该单位必须是与 nodedef 中该输入的 `unittype` 相关联的单位（如果指定）；有关声明单位和单元类型的详细信息，请参阅上面的 [单位](#units) 部分。如果节点的 nodedef（请参阅下面的 [自定义节点](#custom-nodes) 部分）未为输入声明 `unittype`，则节点可以这样做；不允许在没有在节点或适用的 nodedef 上定义兼容的 `unittype` 的情况下为节点输入提供 `unit`。
 
@@ -627,7 +627,7 @@ MaterialX 定义了许多 [标准节点](#standard-nodes)，所有实现都应�
 
 ## 节点图元素
 
-包含任意数量节点和输出声明的图形成节点图，它可以包含在 &lt；nodegraph> 元素中以将它们分组为单个功能单元。有关如何使用节点图描述新节点功能的详细信息，请参阅下面的 [使用节点图的自定义节点定义](#custom-node-definition-using-node-graphs) 部分。
+包含任意数量节点和输出声明的图形成节点图，它可以包含在 &lt;nodegraph> 元素中以将它们分组为单个功能单元。有关如何使用节点图描述新节点功能的详细信息，请参阅下面的 [使用节点图的自定义节点定义](#custom-node-definition-using-node-graphs) 部分。
 
 ```xml
   <nodegraph name="graphname">
@@ -640,7 +640,7 @@ MaterialX 定义了许多 [标准节点](#standard-nodes)，所有实现都应�
 
 ## 输出元素
 
-输出数据流使用 **&lt;output>** 元素定义，可用于声明哪些输出流可连接到其他 MaterialX 元素。在节点图中，&lt；output> 元素声明一个输出流，当节点图是自定义节点的实现时，该输出流可以连接到着色器输入或另一个图中引用节点的输入。有关将节点图用作节点实现的详细信息，请参阅 [使用节点图的自定义节点定义](#custom-node-definition-using-node-graphs) 部分。
+输出数据流使用 **&lt;output>** 元素定义，可用于声明哪些输出流可连接到其他 MaterialX 元素。在节点图中，&lt;output> 元素声明一个输出流，当节点图是自定义节点的实现时，该输出流可以连接到着色器输入或另一个图中引用节点的输入。有关将节点图用作节点实现的详细信息，请参阅 [使用节点图的自定义节点定义](#custom-node-definition-using-node-graphs) 部分。
 
 ```xml
   <output name="albedo" type="color3" nodename="n9"/>
@@ -652,11 +652,11 @@ MaterialX 定义了许多 [标准节点](#standard-nodes)，所有实现都应�
 
 * `name`（字符串，必需）：输出的名称
 * `type`（字符串，必需）：输出的 MaterialX 类型
-* `nodename`（字符串，可选）：文档中同一范围内节点的名称，其结果值将输出。此属性对于节点图中的 &lt；output> 元素是必需的，但不允许在 &lt；nodedef> 中的 &lt；output> 元素中使用。
-* `output`（字符串，可选）：如果 `nodename` 指定的节点有多个输出，则要连接此 &lt；output> 的特定输出的名称。
+* `nodename`（字符串，可选）：文档中同一范围内节点的名称，其结果值将输出。此属性对于节点图中的 &lt;output> 元素是必需的，但不允许在 &lt;nodedef> 中的 &lt;output> 元素中使用。
+* `output`（字符串，可选）：如果 `nodename` 指定的节点有多个输出，则要连接此 &lt;output> 的特定输出的名称。
 * `uniform`（布尔值，可选）：如果设置为 "true"，则此节点的输出被视为统一值，并且此输出可以连接到相同（或兼容）类型的统一输入。由创建节点图的应用程序确保值实际上是统一的。默认为 "false"。
 
-MaterialX 还支持 Output 元素的以下附加属性，用于以 2D 空间处理节点图并为了效率保存或缓存输出为图像的应用程序，例如纹理烘焙或图像缓存。这些属性**不**影响从此 &lt；output> 连接到其他节点的值，例如，它们将保持在工作色彩空间中并保留完整分辨率和位深度精度。
+MaterialX 还支持 Output 元素的以下附加属性，用于以 2D 空间处理节点图并为了效率保存或缓存输出为图像的应用程序，例如纹理烘焙或图像缓存。这些属性**不**影响从此 &lt;output> 连接到其他节点的值，例如，它们将保持在工作色彩空间中并保留完整分辨率和位深度精度。
 
 * `colorspace`（字符串，可选）：输出图像的色彩空间名称。支持色彩空间管理的应用程序预计将执行将输出颜色转换到此空间所需的转换。
 * `width`（整数，可选）：输出图像的预期宽度（像素）。
@@ -696,10 +696,10 @@ MaterialX 的核心部分是其标准节点集，分为五类:源节点、操作
 
 <a id="attr-doc"> </a>
 
-* `doc`（字符串属性）：此元素的功能或用途描述；可以包括标准 HTML 格式字符串，如 &lt；b>、&lt;ul>、&lt；p> 等，但不包括复杂格式，如 CSS 或外部引用（例如，没有超链接或图像）。可用于功能文档或 UI 弹出“工具提示”字符串。
+* `doc`（字符串属性）：此元素的功能或用途描述；可以包括标准 HTML 格式字符串，如 &lt;b>、&lt;ul>、&lt;p> 等，但不包括复杂格式，如 CSS 或外部引用（例如，没有超链接或图像）。可用于功能文档或 UI 弹出“工具提示”字符串。
 
 
-所有节点类型（源、操作符、着色器节点和材质节点）以及 &lt；look> 元素都支持以下 UI 相关属性:
+所有节点类型（源、操作符、着色器节点和材质节点）以及 &lt;look> 元素都支持以下 UI 相关属性:
 
 <a id="attr-xpos"> </a>
 
@@ -725,21 +725,21 @@ MaterialX 的核心部分是其标准节点集，分为五类:源节点、操作
 
 MaterialX 定义 xpos 值从左到右递增，ypos 值从上到下递增，一般流向通常向下。例如，节点输入在顶部，输出在底部，位于 (10, 10) 的节点可以自然地连接到位于 (10, 11) 的节点。使用从左到右流的内容创建应用程序可以在读取或写入 MaterialX 数据时在其内部表示中交换 X 和 Y 坐标，并且在内部使用 Y 坐标向上而不是向下增加的应用程序可以在 MTLX 文件与其内部表示之间反转 Y 坐标。
 
-&lt;nodedef> 和节点实例中的 &lt；input> 和 &lt；token> 元素（但不在 &lt；implementation> 或 &lt；nodegraph> 参数接口中）支持以下 UI 相关属性:
+&lt;nodedef> 和节点实例中的 &lt;input> 和 &lt;token> 元素（但不在 &lt;implementation> 或 &lt;nodegraph> 参数接口中）支持以下 UI 相关属性:
 
 <a id="attr-uivisible"> </a>
 
-* `uivisible`（布尔属性）：输入在 UI 中是否可见。如果在 &lt；nodedef> 的输入/令牌上指定了 `uivisible`，则定义该输入/令牌的默认可见性，而在节点实例的输入/令牌上指定的 `uivisible` 仅影响该特定实例中输入/令牌的可见性。默认为 "true"。
+* `uivisible`（布尔属性）：输入在 UI 中是否可见。如果在 &lt;nodedef> 的输入/令牌上指定了 `uivisible`，则定义该输入/令牌的默认可见性，而在节点实例的输入/令牌上指定的 `uivisible` 仅影响该特定实例中输入/令牌的可见性。默认为 "true"。
 
 <a id="attr-uiadvanced"> </a>
 
-* `uiadvanced`（布尔属性）：输入是否被视为“高级”参数，应用程序可以选择在更“基本”模式下隐藏该参数。通常应仅在 &lt；nodedef> 中声明。默认为 "false"，表示如果 `uivisible` 为 true，则应显示输入，而 "true" 表示如果 `uivisible` 为 true 且应用程序 UI 设置为显示“高级”参数，则将显示输入。
+* `uiadvanced`（布尔属性）：输入是否被视为“高级”参数，应用程序可以选择在更“基本”模式下隐藏该参数。通常应仅在 &lt;nodedef> 中声明。默认为 "false"，表示如果 `uivisible` 为 true，则应显示输入，而 "true" 表示如果 `uivisible` 为 true 且应用程序 UI 设置为显示“高级”参数，则将显示输入。
 
 
 
 ## 背景元素
 
-背景元素用于在节点图中包含、分组和记录节点，它们对图的功能没有影响。&lt；backdrop> 元素支持以下属性:
+背景元素用于在节点图中包含、分组和记录节点，它们对图的功能没有影响。&lt;backdrop> 元素支持以下属性:
 
 * `contains`（stringarray 属性）：背景“包含”的节点名称的逗号分隔列表；默认为不包含任何节点。
 * `minimized`（布尔属性）：此背景是否在应用程序的 UI 中折叠为单个节点大小的框；默认为 false。
@@ -858,7 +858,7 @@ MaterialX 定义 xpos 值从左到右递增，ypos 值从上到下递增，一�
 
 MaterialX 支持定义特定于特定渲染“目标”的节点、属性和输入。这允许单个实现将某些值或节点限制为仅对其有效的目标，或允许为不同的渲染器定义相同节点功能的单独定义。
 
-目标使用 &lt；targetdef> 元素声明:
+目标使用 &lt;targetdef> 元素声明:
 
 ```xml
   <targetdef name="oslpattern"/>
@@ -885,7 +885,7 @@ targetdef 元素还可以为该目标指定其他自定义属性，例如配置�
 
 虽然 MaterialX 规范描述了与符合 MaterialX 的应用程序有意义的属性和元素，但允许向标准 MaterialX 元素添加自定义属性和输入。这些自定义属性和子元素被不理解它们的应用程序忽略，尽管应用程序应该保留并重新输出它们及其值和连接，即使它们不理解其含义。
 
-如果应用程序需要与任何 MaterialX 元素相关的其他信息，它可以定义和使用具有非标准名称的其他属性。自定义属性使用 &lt；attributedef> 元素定义:
+如果应用程序需要与任何 MaterialX 元素相关的其他信息，它可以定义和使用具有非标准名称的其他属性。自定义属性使用 &lt;attributedef> 元素定义:
 
 
 ```xml
@@ -904,7 +904,7 @@ targetdef 元素还可以为该目标指定其他自定义属性，例如配置�
                 target="mystudio" elements="image/file"/>
 ```
 
-上面的第一个示例为表面材质定义了 3ds Max 特定的名称属性，除了其符合 MaterialX 的名称外，还可以为其赋值以保留原始包特定的名称；这里假设 `maxmtlname` 是该特定实现用于此目的的属性名称。第二个示例定义了 "mystudio" 特定的布尔属性 "vflip"，它可以在 &lt；image> 节点的 "file" 输入中使用。
+上面的第一个示例为表面材质定义了 3ds Max 特定的名称属性，除了其符合 MaterialX 的名称外，还可以为其赋值以保留原始包特定的名称；这里假设 `maxmtlname` 是该特定实现用于此目的的属性名称。第二个示例定义了 "mystudio" 特定的布尔属性 "vflip"，它可以在 &lt;image> 节点的 "file" 输入中使用。
 
 一旦定义，自定义属性的使用方式与标准属性完全相同:
 
@@ -920,7 +920,7 @@ targetdef 元素还可以为该目标指定其他自定义属性，例如配置�
 
 #### 自定义输入
 
-如果应用程序需要在标准 MaterialX 节点中添加其他自定义输入，它可以为该节点定义目标应用程序特定的 &lt；nodedef>，从标准节点的 &lt；nodedef> 继承基本输入定义，然后添加特定于该目标应用程序的输入。
+如果应用程序需要在标准 MaterialX 节点中添加其他自定义输入，它可以为该节点定义目标应用程序特定的 &lt;nodedef>，从标准节点的 &lt;nodedef> 继承基本输入定义，然后添加特定于该目标应用程序的输入。
 
 ```xml
   <nodedef name="ND_image_color4_maya" node="image" target="maya" inherit="ND_image_color4">
@@ -928,7 +928,7 @@ targetdef 元素还可以为该目标指定其他自定义属性，例如配置�
   </nodedef>
 ```
 
-在上面的示例中，已声明 color4 类型 &lt；image> 节点的 Maya 特定版本，从标准声明继承，然后添加 Maya 特定的 "preFilter" 输入。
+在上面的示例中，已声明 color4 类型 &lt;image> 节点的 Maya 特定版本，从标准声明继承，然后添加 Maya 特定的 "preFilter" 输入。
 
 使用节点时，将自动使用适用于当前目标的定义，其他目标将忽略不属于该目标 nodedef 的任何输入。但是，如果需要，可以在输入上指定文档性 `target` 属性以提示它 intended for 哪个目标。在此示例中，"preFilter" 输入已表明它特定于 "maya" 目标。
 
@@ -942,35 +942,35 @@ targetdef 元素还可以为该目标指定其他自定义属性，例如配置�
 
 ## 自定义节点
 
-特定应用程序通常支持不直接映射到标准 MaterialX 节点的源和操作符。单个实现可以提供自己的自定义节点，使用 &lt；nodedef> 元素声明其参数接口，并使用 &lt；implementation> 和/或 &lt；nodegraph> 元素定义其行为。
+特定应用程序通常支持不直接映射到标准 MaterialX 节点的源和操作符。单个实现可以提供自己的自定义节点，使用 &lt;nodedef> 元素声明其参数接口，并使用 &lt;implementation> 和/或 &lt;nodegraph> 元素定义其行为。
 
 
 ### 自定义节点声明 NodeDef 元素
 
-每个自定义节点必须使用 &lt；nodedef> 元素显式声明，子 &lt；input>、&lt;token> 和 &lt；output> 元素指定节点端口的预期名称和类型。
+每个自定义节点必须使用 &lt;nodedef> 元素显式声明，子 &lt;input>、&lt;token> 和 &lt;output> 元素指定节点端口的预期名称和类型。
 
 &lt;nodedef> 元素的属性:
 
-* `name`（字符串，必需）：此 &lt；nodedef> 的唯一名称
+* `name`（字符串，必需）：此 &lt;nodedef> 的唯一名称
 * `node`（字符串，必需）：正在定义的自定义节点的名称
-* `inherit`（字符串，可选）：要从中继承节点定义的 &lt；nodedef> 的 `name`；此 nodedef 和继承的 nodedef 的输出类型必须匹配，并且此 nodedef 的输入/输出定义将应用于继承的 nodedef 之上。
+* `inherit`（字符串，可选）：要从中继承节点定义的 &lt;nodedef> 的 `name`；此 nodedef 和继承的 nodedef 的输出类型必须匹配，并且此 nodedef 的输入/输出定义将应用于继承的 nodedef 之上。
 * `nodegroup`（字符串，可选）：此节点声明所属的可选组。标准 MaterialX 节点的 `nodegroup` 值与描述它们的章节标题相匹配，例如 "texture2d"、"procedural"、"geometric"、"application"、"math"、"adjustment"、"compositing"、"conditional"、"channel"、"convolution" 或 "organization"。
 * `version`（字符串，可选）：此 nodedef 的版本字符串，允许节点使用引用节点的特定版本。版本字符串应采用 "_major_[._minor_]" 格式，即一个或两个由点分隔的整数（如果未提供，则次要版本假定为 "0"）。如果同一 `node` 和 `target` 有多个具有相同输入和输出类型组合的 nodedef，则它们必须各自指定 `version`。
 * `isdefaultversion`（布尔值，可选）：如果为 true，则此 nodedef 应用于未请求特定版本的节点实例。仅当节点有多个声明 `version` 的 nodedef 时才需要指定 `isdefaultversion` "true"，并且不允许同一 `node` 和 `target` 具有相同输入和输出类型组合的多个 nodedef 将 `isdefaultversion` 设置为 "true"。默认为 "false"。
 * `target`（stringarray，可选）：此 nodedef 限制的目标集。默认情况下，nodedef 被认为是通用的，不限于任何特定目标，但某些目标可能对同一节点有不同的参数名称或用法。
-* `uiname`（字符串，可选）：要在 UI 中显示的此 nodedef 的替代 "node" 值。如果未提供 `uiname`，则 `node` 是 nodedef 的假定 UI 节点值。当 &lt；nodedef> 定义命名空间时，这最有用，因此用户不需要看到节点的完整命名空间路径。
-* `internalgeomprops`（stringarray，可选）：节点期望能够在内部访问的 MaterialX 几何属性列表（例如 "position"、"normal"、"texcoord" 等或由 &lt；geompropdef> 元素定义的任何名称）。此元数据提示允许代码生成器确保此数据可用并可用于错误检查。`Internalgeomprops` 对于实现由外部代码定义的节点最有用；对于节点图定义的节点不必要，因为可以通过检查节点图来确定访问的几何属性列表。
+* `uiname`（字符串，可选）：要在 UI 中显示的此 nodedef 的替代 "node" 值。如果未提供 `uiname`，则 `node` 是 nodedef 的假定 UI 节点值。当 &lt;nodedef> 定义命名空间时，这最有用，因此用户不需要看到节点的完整命名空间路径。
+* `internalgeomprops`（stringarray，可选）：节点期望能够在内部访问的 MaterialX 几何属性列表（例如 "position"、"normal"、"texcoord" 等或由 &lt;geompropdef> 元素定义的任何名称）。此元数据提示允许代码生成器确保此数据可用并可用于错误检查。`Internalgeomprops` 对于实现由外部代码定义的节点最有用；对于节点图定义的节点不必要，因为可以通过检查节点图来确定访问的几何属性列表。
 
-自定义节点允许通过提供具有不同输入和输出类型组合的多个 &lt；nodedef> 元素来重载单个 `node` 名称。这种重载既允许用于自定义 `node` 名称，也允许用于标准 MaterialX 节点集。在单个 MaterialX 文档及其包含内容的范围内，不得为单个 `node` 名称提供具有相同目标和版本的相同输入和输出类型组合的两个 &lt；nodedef> 元素。建议 `node` 的所有 &lt；nodedef> 变体使用完全相同的输入名称集，仅在类型上有所不同，没有任何变体添加或删除任何输入。还建议节点的新版本与早期版本完全向后兼容（包括输入的默认值），以便节点默认版本的更改不会破坏功能；如果这不可能，建议使用不同的 `node` 名称。
+自定义节点允许通过提供具有不同输入和输出类型组合的多个 &lt;nodedef> 元素来重载单个 `node` 名称。这种重载既允许用于自定义 `node` 名称，也允许用于标准 MaterialX 节点集。在单个 MaterialX 文档及其包含内容的范围内，不得为单个 `node` 名称提供具有相同目标和版本的相同输入和输出类型组合的两个 &lt;nodedef> 元素。建议 `node` 的所有 &lt;nodedef> 变体使用完全相同的输入名称集，仅在类型上有所不同，没有任何变体添加或删除任何输入。还建议节点的新版本与早期版本完全向后兼容（包括输入的默认值），以便节点默认版本的更改不会破坏功能；如果这不可能，建议使用不同的 `node` 名称。
 
-可以提供 `inherit` 属性以允许一个 &lt；nodedef> 从另一个继承:这对于在目标或版本特定的 &lt；nodedef> 中定义其他输入最有用，从节点或着色器的通用规范定义继承。从另一个 nodedef 继承的 NodeDefs 不能重新声明父 nodedef 中的 &lt；output>，只能添加其他新的 &lt；output>。
+可以提供 `inherit` 属性以允许一个 &lt;nodedef> 从另一个继承:这对于在目标或版本特定的 &lt;nodedef> 中定义其他输入最有用，从节点或着色器的通用规范定义继承。从另一个 nodedef 继承的 NodeDefs 不能重新声明父 nodedef 中的 &lt;output>，只能添加其他新的 &lt;output>。
 
-NodeDefs 必须在 &lt；nodedef> 内定义一个或多个子 &lt；output> 元素，以说明每个输出的名称和类型；对于使用节点图定义的节点，输出的名称和类型必须与节点图中的 &lt；output> 元素一致。单输出 &lt；nodedef> 的输出名称不太重要，因为对单输出节点输出的任何连接都将成功，无论实际引用的 `name` 是什么，尽管按照惯例，单输出节点首选名称 "out"。有关详细信息，请参阅下面的 [**NodeDef 输出元素**](#nodedef-output-elements) 部分。
+NodeDefs 必须在 &lt;nodedef> 内定义一个或多个子 &lt;output> 元素，以说明每个输出的名称和类型；对于使用节点图定义的节点，输出的名称和类型必须与节点图中的 &lt;output> 元素一致。单输出 &lt;nodedef> 的输出名称不太重要，因为对单输出节点输出的任何连接都将成功，无论实际引用的 `name` 是什么，尽管按照惯例，单输出节点首选名称 "out"。有关详细信息，请参阅下面的 [**NodeDef 输出元素**](#nodedef-output-elements) 部分。
 
 
 #### NodeDef 参数接口
 
-自定义节点的参数接口通过 &lt；nodedef> 的一组子 &lt；input> 和 &lt；token> 元素指定，而节点文件夹结构的文档可以使用多个 &lt；uifolder> 元素定义，每个元素可以提供 doc 属性以提供该文件夹层的文档。&lt；uifolder> 元素不能包含任何其他元素；特别是，nodedef 接口的 &lt；input> 和 &lt；token> 必须是 &lt；nodedef> 的直接子元素。嵌套文件夹可以使用文件夹的完整路径指示，文件夹级别之间使用 "/" 分隔符。
+自定义节点的参数接口通过 &lt;nodedef> 的一组子 &lt;input> 和 &lt;token> 元素指定，而节点文件夹结构的文档可以使用多个 &lt;uifolder> 元素定义，每个元素可以提供 doc 属性以提供该文件夹层的文档。&lt;uifolder> 元素不能包含任何其他元素；特别是，nodedef 接口的 &lt;input> 和 &lt;token> 必须是 &lt;nodedef> 的直接子元素。嵌套文件夹可以使用文件夹的完整路径指示，文件夹级别之间使用 "/" 分隔符。
 
 ```xml
   <nodedef name="ND_multinoise" node="multinoise">
@@ -984,7 +984,7 @@ NodeDefs 必须在 &lt；nodedef> 内定义一个或多个子 &lt；output> 元�
 
 #### NodeDef 输入元素
 
-**Input** 元素在 &lt；nodedef> 中用于声明节点的空间变化和统一输入:
+**Input** 元素在 &lt;nodedef> 中用于声明节点的空间变化和统一输入:
 
 ```xml
   <input name="inputname" type="inputtype" [value="value"]/>
@@ -995,19 +995,19 @@ NodeDef Input 元素的属性:
 * `name`（字符串，必需）：着色器输入的名称
 * `type`（字符串，必需）：着色器输入的 MaterialX 类型
 * `value`（与 `type` 相同的类型，可选）：此输入的默认值，如果输入保持未连接且未另外赋值，则使用该值
-* `uniform`（布尔值，可选）：如果设置为 "true"，则此输入只能接受统一值，并且只能连接到 &lt；constant> 节点的输出或任何其他输出明确声明为 "uniform" 的节点（可选通过多个 &lt；dot> 节点），但不能连接到其他（非 "uniform"）节点的输出。字符串和文件名类型的输入必须将 `uniform` 设置为 true。
+* `uniform`（布尔值，可选）：如果设置为 "true"，则此输入只能接受统一值，并且只能连接到 &lt;constant> 节点的输出或任何其他输出明确声明为 "uniform" 的节点（可选通过多个 &lt;dot> 节点），但不能连接到其他（非 "uniform"）节点的输出。字符串和文件名类型的输入必须将 `uniform` 设置为 true。
 * `defaultgeomprop`（字符串，可选）：对于 vector2 或 vector3 输入，提供此输入默认值的内在几何属性的名称，必须是 "position"、"normal"、"tangent"、"bitangent" 或 "texcoord" 之一，或对于 vector3 输入为 vector3 类型自定义几何属性，或对于 vector2 输入为 "texcoord" 或 vector2 类型自定义几何属性。对于标准几何属性，这实际上等同于声明输入到具有默认输入值的几何节点的默认连接。不能在统一输入上指定。
 * `enum`（stringarray，可选）：输入允许采用的字符串值描述符的逗号分隔非独占列表:对于字符串和 stringarray 类型输入，这些是实际值（或 stringarrays 的每个数组索引的值）；对于其他类型，这些是 "enum" 标签，例如在应用程序用户界面中为 `enumvalues` 指定的每个实际基础值显示。枚举列表可以被认为是输入的常用值或 UI 标签列表，而不是严格列表，MaterialX 本身不强制执行指定的输入枚举值实际上在此列表中，除非输入是 "string"（或 "stringarray"）类型并提供枚举列表，则值必须是枚举 stringarray 值之一。
-* `enumvalues`（<em>type</em>array，可选）：对于非字符串/stringarray 类型，与 &lt；input> 相同基本类型的值的逗号分隔列表，表示如果在 UI 中选择相应的 `enum` 字符串将使用的值。MaterialX 本身不强制执行指定的输入值实际上在此列表中。请注意，实现允许为特定目标重新定义 `enumvalues`（但不是 `enum`）：请参阅下面的 [使用 Implementation 元素的自定义节点定义](#custom-node-definition-using-implementation-elements) 部分。
+* `enumvalues`（<em>type</em>array，可选）：对于非字符串/stringarray 类型，与 &lt;input> 相同基本类型的值的逗号分隔列表，表示如果在 UI 中选择相应的 `enum` 字符串将使用的值。MaterialX 本身不强制执行指定的输入值实际上在此列表中。请注意，实现允许为特定目标重新定义 `enumvalues`（但不是 `enum`）：请参阅下面的 [使用 Implementation 元素的自定义节点定义](#custom-node-definition-using-implementation-elements) 部分。
 * `colorspace`（字符串，可选）：对于 color3 或 color4 类型输入，此输入默认值的色彩空间。
-* `unittype`（字符串，可选）：此输入的单位类型，例如 "distance"，必须由 &lt；unittypedef> 定义。默认不指定 unittype。只有 float、vector<em>N</em> 和 filename 类型输入可以指定 `unittype`。
+* `unittype`（字符串，可选）：此输入的单位类型，例如 "distance"，必须由 &lt;unittypedef> 定义。默认不指定 unittype。只有 float、vector<em>N</em> 和 filename 类型输入可以指定 `unittype`。
 * `unit`（字符串，可选）：此输入的特定单位。Nodedef 输入通常不指定单位；如果指定，则表示该节点的实现期望值以该单位指定，并且使用该节点的任何调用使用不同单位应转换为 nodedef 指定的该输入单位，而不是应用程序的场景单位。最常见的情况是角度值，nodedef 可能指定期望以度为单位给出值。
 * `uiname`（字符串，可选）：此输入在 UI 中显示的替代名称。如果未提供 `uiname`，则 `name` 是输入的假定 UI 名称。
 * `uifolder`（属性，字符串，可选）：此输入在 UI 中出现的文件夹的路径名称，使用 "/" 字符作为嵌套 UI 文件夹的分隔符。
 * `uimin`（整数或浮点数或 color<em>N</em> 或 vector<em>N</em>，可选）：对于 integer、float、color<em>N</em> 或 vector<em>N</em> 类型的输入，UI 允许此特定值的最小值。MaterialX 本身不将其强制执行为实际最小值。
 * `uimax`（整数或浮点数或 color<em>N</em> 或 vector<em>N</em>，可选）：对于 integer、float、color<em>N</em> 或 vector<em>N</em> 类型的输入，UI 允许此特定值的最大值。MaterialX 本身不将其强制执行为实际最大值。
 * `uisoftmin`（整数或浮点数或 color<em>N</em> 或 vector<em>N</em>，可选）：对于 integer、float、color<em>N</em> 或 vector<em>N</em> 类型的输入，此输入的建议最小 UI 滑块值，应 >= `uimin`。MaterialX 本身不将其强制执行为实际最小值。
-* `uisoftmax`（整数或浮点数或 color<em>N</em> 或 vector<em>N</em>，可选）：对于 integer、float、color<em>N</em> 或 vector<em>N</em> 类型的输入，此输入的建议最大 UI 滑块值，应 &lt；= `uimax`。MaterialX 本身不将其强制执行为实际最大值。
+* `uisoftmax`（整数或浮点数或 color<em>N</em> 或 vector<em>N</em>，可选）：对于 integer、float、color<em>N</em> 或 vector<em>N</em> 类型的输入，此输入的建议最大 UI 滑块值，应 &lt;= `uimax`。MaterialX 本身不将其强制执行为实际最大值。
 * `uistep`（整数或浮点数或 color<em>N</em> 或 vector<em>N</em>，可选）：对于 integer、float、color<em>N</em> 或 vector<em>N</em> 类型的输入，UI 将递增或递减输入值分量的增量大小。
 * `hint`（字符串）：帮助代码生成器理解输入如何使用的提示。目前为 nodedef 输入定义了以下提示:
     * "transparency":输入指示着色透明度级别。
@@ -1019,7 +1019,7 @@ NodeDef Input 元素的属性:
 
 #### NodeDef Token 元素
 
-**Token** 元素在 &lt；nodedef> 中用于声明统一的 "接口令牌" 字符串替换值，以在节点节点图实现中使用的文件名中引用和替换:
+**Token** 元素在 &lt;nodedef> 中用于声明统一的 "接口令牌" 字符串替换值，以在节点节点图实现中使用的文件名中引用和替换:
 
 ```xml
   <token name="tokenname" type="tokentype" [value="value"]/>
@@ -1031,7 +1031,7 @@ NodeDef Token 元素的属性:
 * `type`（字符串，必需）：令牌的 MaterialX 类型；当令牌的值替换到文件名中时，令牌值将转换为字符串，因此建议对令牌使用字符串或整数类型，尽管允许任何 MaterialX 类型。
 * `value`（与 `type` 相同的类型，可选）：此令牌的默认值，如果调用节点时未为此令牌定义值，则使用该值。如果未定义默认值，则令牌变为必需，因此任何未为该令牌分配值的自定义节点调用都将出错。
 * `enum`（stringarray，可选）：令牌可以采用的字符串值描述符的逗号分隔非独占列表:对于字符串类型令牌，这些是实际值；对于其他类型，这些是 "enum" 标签，例如在应用程序用户界面中为 enumvalues 指定的每个实际基础值显示。枚举列表可以被认为是输入的常用值或 UI 标签列表，而不是严格列表，MaterialX 本身不强制执行指定的令牌枚举值实际上在此列表中，除非输入是 "string"（或 "stringarray"）类型并提供枚举列表，则值必须是枚举 stringarray 值之一。
-* `enumvalues`（<em>type</em>array，可选）：对于非字符串类型，与 &lt；token> 相同基本类型的值的逗号分隔列表，表示如果在 UI 中选择相应的 enum 字符串将使用的值。MaterialX 本身不强制执行指定的令牌值实际上在此列表中。请注意，实现允许为特定目标重新定义 enumvalues（但不是 enum）：请参阅下面的 [使用 Implementation 元素的自定义节点定义](#custom-node-definition-using-implementation-elements) 部分。
+* `enumvalues`（<em>type</em>array，可选）：对于非字符串类型，与 &lt;token> 相同基本类型的值的逗号分隔列表，表示如果在 UI 中选择相应的 enum 字符串将使用的值。MaterialX 本身不强制执行指定的令牌值实际上在此列表中。请注意，实现允许为特定目标重新定义 enumvalues（但不是 enum）：请参阅下面的 [使用 Implementation 元素的自定义节点定义](#custom-node-definition-using-implementation-elements) 部分。
 * `uiname`（字符串，可选）：此令牌在 UI 中显示的替代名称。如果未提供 `uiname`，则 `name` 是令牌的假定 UI 名称。
 * `uifolder`（字符串，可选）：此令牌在 UI 中出现的文件夹的路径名称，使用 "/" 字符作为嵌套 UI 文件夹的分隔符。
 
@@ -1040,7 +1040,7 @@ NodeDef Token 元素的属性:
 
 #### NodeDef 输出元素
 
-**Output** 元素在 &lt；nodedef> 中用于声明节点定义的输出，包括输出的名称、类型和默认值或 "defaultinput" 连接:
+**Output** 元素在 &lt;nodedef> 中用于声明节点定义的输出，包括输出的名称、类型和默认值或 "defaultinput" 连接:
 
 ```xml
   <output name="outputname" type="outputtype" [value="value"]/>
@@ -1050,32 +1050,32 @@ NodeDef Output 元素的属性:
 
 * `name`（字符串，必需）：输出的名称。对于单输出节点，首选名称 "out"。
 * `type`（字符串，必需）：输出的 MaterialX 类型。
-* `defaultinput`（字符串，可选）：&lt;nodedef> 内 &lt；input> 元素的名称，必须与 `type` 类型相同，没有该节点实现的应用程序将不加修改地传递。
+* `defaultinput`（字符串，可选）：&lt;nodedef> 内 &lt;input> 元素的名称，必须与 `type` 类型相同，没有该节点实现的应用程序将不加修改地传递。
 * `default`（与 `type` 相同的类型，可选）：没有该节点实现的应用程序将输出的常量值，或者如果指定了 `defaultinput` 输入但该输入未连接。
 
-NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以为节点定义默认输出值，但不能定义到其他节点的连接（defaultinput 直通连接声明除外）或任何输出文件相关属性，如 width、height、colorspace 或 bitdepth。
+NodeDefs 的 &lt;output> 元素与 NodeGraph 输出的类似，但它们可以为节点定义默认输出值，但不能定义到其他节点的连接（defaultinput 直通连接声明除外）或任何输出文件相关属性，如 width、height、colorspace 或 bitdepth。
 
 
 
 ### 使用 Implementation 元素的自定义节点定义
 
-一旦通过 &lt；nodedef> 声明了自定义节点的参数接口，MaterialX 提供了两种精确其功能的方法:通过引用外部源代码的 &lt；implementation> 元素，或通过从现有节点组合所需功能的 &lt；nodegraph> 元素。在 MaterialX 中为自定义节点提供定义是可选的，但建议用于最大清晰度和可移植性。
+一旦通过 &lt;nodedef> 声明了自定义节点的参数接口，MaterialX 提供了两种精确其功能的方法:通过引用外部源代码的 &lt;implementation> 元素，或通过从现有节点组合所需功能的 &lt;nodegraph> 元素。在 MaterialX 中为自定义节点提供定义是可选的，但建议用于最大清晰度和可移植性。
 
 **Implementation** 元素用于将外部函数源代码与特定的 nodedef 关联。Implementation 元素支持以下属性:
 
-* `name`（字符串，必需）：此 &lt；implementation> 的唯一名称
-* `nodedef`（字符串，必需）：此 &lt；implementation> 适用的 &lt；nodedef> 的名称
-* `nodegraph`（字符串，可选）：作为指定 nodedef 实现的 &lt；nodegraph> 的名称；请参阅下面的 [使用节点图的自定义节点定义](#custom-node-definition-using-node-graphs) 部分。
+* `name`（字符串，必需）：此 &lt;implementation> 的唯一名称
+* `nodedef`（字符串，必需）：此 &lt;implementation> 适用的 &lt;nodedef> 的名称
+* `nodegraph`（字符串，可选）：作为指定 nodedef 实现的 &lt;nodegraph> 的名称；请参阅下面的 [使用节点图的自定义节点定义](#custom-node-definition-using-node-graphs) 部分。
 * `implname`（字符串，可选）：指定目标的此节点的替代名称；这允许说对于此特定目标，节点/着色器称为其他名称但在功能上等同于 nodedef 描述的节点。请注意，MaterialX 文档中的节点图应始终使用 nodedef 中定义的节点名称，而不是实现特定的名称。
 * `file`（filename，可选）：包含此特定节点模板入口点源代码的外部文件的 URI。此文件可能包含同一自定义节点的其他模板的源代码，和/或其他自定义节点的源代码。
 * `sourcecode`（字符串，可选）：包含节点实际源代码的字符串。
 * `function`（字符串，可选）：给定源代码中包含此节点实现的函数的名称。如果未给出此属性，则假定源代码是像 ShaderGen 这样的着色器代码生成器的内联表达式。请参考适当的语言规范和开发人员指南（如 GitHub documents/DeveloperGuide 目录中的 ShaderGeneration.md 文件），了解使用内联代码的有效语法。
-* `target`（stringarray，可选）：此实现限制的目标集。默认情况下，实现被认为适用于引用的 nodedef 适用的所有目标。如果引用的 &lt；nodedef> 也指定了 target，则此 `target` 必须是 nodedef 目标列表的子集。
+* `target`（stringarray，可选）：此实现限制的目标集。默认情况下，实现被认为适用于引用的 nodedef 适用的所有目标。如果引用的 &lt;nodedef> 也指定了 target，则此 `target` 必须是 nodedef 目标列表的子集。
 * `format`（字符串，可选）：给定源代码使用的格式，如果源代码是可以由目标渲染器编译和执行的原样完整着色器，则通常为 "shader"，或者如果源代码是需要代码生成器处理才能编译和执行的代码片段，则为 "fragment"。默认为 "shader"。
 
-&lt;implementation> 可以定义 `file` 或 `sourcecode` 属性，或都不定义，但不能同时定义两者。如果 &lt；implementation> 元素指定了 `target` 但没有 `file` 或 `sourcecode`，则它被解释为纯粹说明给定目标存在私有定义。由于 &lt；implementation> 中的定义可能限于特定目标，因此具有此类限制的 &lt；nodedef> 可能并非在所有应用程序中都可用；因此，通过 &lt；implementation> 定义的 &lt；nodedef> 应在可能时为 `default` 和/或 `defaultinput` 提供值，指定找不到给定节点的定义时的预期行为。应该注意的是，指定 `target` 旨在帮助应用程序区分节点的不同实现并暗示特定情况的兼容性，但不一定保证兼容性:它们旨在作为特定实现的提示，由宿主应用程序确定哪个 &lt；implementation>（如果有）适合任何特定用途。
+&lt;implementation> 可以定义 `file` 或 `sourcecode` 属性，或都不定义，但不能同时定义两者。如果 &lt;implementation> 元素指定了 `target` 但没有 `file` 或 `sourcecode`，则它被解释为纯粹说明给定目标存在私有定义。由于 &lt;implementation> 中的定义可能限于特定目标，因此具有此类限制的 &lt;nodedef> 可能并非在所有应用程序中都可用；因此，通过 &lt;implementation> 定义的 &lt;nodedef> 应在可能时为 `default` 和/或 `defaultinput` 提供值，指定找不到给定节点的定义时的预期行为。应该注意的是，指定 `target` 旨在帮助应用程序区分节点的不同实现并暗示特定情况的兼容性，但不一定保证兼容性:它们旨在作为特定实现的提示，由宿主应用程序确定哪个 &lt;implementation>（如果有）适合任何特定用途。
 
-由于节点输入使用的名称（如 "normal" 或 "default"）可能与各种着色语言中的保留字冲突，或者对于特定目标可能只是不同，&lt；implementation> 元素可以包含多个 &lt；input> 元素，以将 &lt；nodedef> 中指定的 &lt；input> 的 `name` 重新映射到不同的 `implname`，以指示输入名称在实现代码中实际称为什么。只需要列出需要重新映射到新 `implname` 的输入；对于每个输入，建议列出该输入的 `type` 以明确，但如果指定，它必须与 &lt；nodedef> 中指定的类型匹配:&lt；implementation> 不允许更改 &lt；nodedef> 中定义的类型或任何其他属性。在此示例中，&lt；implementation> 声明 "ND_image_color3" nodedef 中定义的 "default" 输入在 "mx_image_color" 函数中实际称为 "default_value":
+由于节点输入使用的名称（如 "normal" 或 "default"）可能与各种着色语言中的保留字冲突，或者对于特定目标可能只是不同，&lt;implementation> 元素可以包含多个 &lt;input> 元素，以将 &lt;nodedef> 中指定的 &lt;input> 的 `name` 重新映射到不同的 `implname`，以指示输入名称在实现代码中实际称为什么。只需要列出需要重新映射到新 `implname` 的输入；对于每个输入，建议列出该输入的 `type` 以明确，但如果指定，它必须与 &lt;nodedef> 中指定的类型匹配:&lt;implementation> 不允许更改 &lt;nodedef> 中定义的类型或任何其他属性。在此示例中，&lt;implementation> 声明 "ND_image_color3" nodedef 中定义的 "default" 输入在 "mx_image_color" 函数中实际称为 "default_value":
 
 ```xml
   <implementation name="IM_image_color3_osl" nodedef="ND_image_color3"
@@ -1084,7 +1084,7 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
   </implementation>
 ```
 
-对于其 nodedef 描述包括允许值枚举列表的统一输入和令牌，单个实现可以为它们关联不同的目标特定解析值，可能是不同类型；这些可以通过在 &lt；implementation> 内的统一输入或令牌上提供 `enumvalues` 属性来描述，如果适当，提供 `impltype` 以声明这些 enumvalues 的目标特定类型。请注意，如果 nodedef 中枚举输入的类型是数组类型，则 `impltype`（如果指定）也必须是数组类型，而 `enumvalues` 是基础（非数组）类型的值列表。以下 &lt；implementation> 说明对于 "mystudio" 目标，"image" 节点的 uaddressmode 和 vaddressmode 输入实际称为 "extrapolate_u" 和 "extrapolate_v"，是整数而不是字符串，并采用不同的值（例如 "clamp" 是 2）：
+对于其 nodedef 描述包括允许值枚举列表的统一输入和令牌，单个实现可以为它们关联不同的目标特定解析值，可能是不同类型；这些可以通过在 &lt;implementation> 内的统一输入或令牌上提供 `enumvalues` 属性来描述，如果适当，提供 `impltype` 以声明这些 enumvalues 的目标特定类型。请注意，如果 nodedef 中枚举输入的类型是数组类型，则 `impltype`（如果指定）也必须是数组类型，而 `enumvalues` 是基础（非数组）类型的值列表。以下 &lt;implementation> 说明对于 "mystudio" 目标，"image" 节点的 uaddressmode 和 vaddressmode 输入实际称为 "extrapolate_u" 和 "extrapolate_v"，是整数而不是字符串，并采用不同的值（例如 "clamp" 是 2）：
 
 ```xml
   <!-- In ND_image_color3, u/vaddressmode have enum="constant,clamp,periodic,mirror" -->
@@ -1154,14 +1154,14 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
 
 ### 使用节点图的自定义节点定义
 
-或者，可以使用节点图描述自定义节点的实现。&lt；nodegraph> 元素包装标准或自定义节点的图，接受输入并生成指定 &lt；nodedef> 中描述的输出。
+或者，可以使用节点图描述自定义节点的实现。&lt;nodegraph> 元素包装标准或自定义节点的图，接受输入并生成指定 &lt;nodedef> 中描述的输出。
 
-**&lt;nodegraph>** 元素由至少一个节点元素和 &lt；nodegraph> 元素内包含的至少一个 &lt；output> 元素组成。Nodegraph 元素可能是两种类型之一:**功能节点图**，它是由单独的 &lt；nodedef> 定义的节点的实现，或**复合节点图**，它是一组节点分组到节点图容器中。功能节点图必须自己指定 `nodedef` 属性或由具有 "nodegraph" 属性的 &lt；implementation> 元素引用，而复合节点图可能两者都不做，但可以可选地指定一个或多个 &lt；input> 和/或 &lt；token> 元素。
+**&lt;nodegraph>** 元素由至少一个节点元素和 &lt;nodegraph> 元素内包含的至少一个 &lt;output> 元素组成。Nodegraph 元素可能是两种类型之一:**功能节点图**，它是由单独的 &lt;nodedef> 定义的节点的实现，或**复合节点图**，它是一组节点分组到节点图容器中。功能节点图必须自己指定 `nodedef` 属性或由具有 "nodegraph" 属性的 &lt;implementation> 元素引用，而复合节点图可能两者都不做，但可以可选地指定一个或多个 &lt;input> 和/或 &lt;token> 元素。
 
 
 #### 功能节点图
 
-**功能节点图**是指定 &lt；nodedef> 的基于节点图的实现，&lt；nodedef> 声明节点图接受的输入集:功能节点图本身不能指定任何直接子输入元素。
+**功能节点图**是指定 &lt;nodedef> 的基于节点图的实现，&lt;nodedef> 声明节点图接受的输入集:功能节点图本身不能指定任何直接子输入元素。
 
 ```xml
   <nodegraph name="graphname" nodedef="nodedefname" [target="target"]>
@@ -1181,19 +1181,19 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
          nodegraph="graphname" [target="target"]/>
 ```
 
-&lt;nodedef> 的 &lt；output> 的类型与节点图 &lt；output> 的类型必须一致，如果有多个输出，则 &lt；nodegraph> 和 &lt；nodedef> 中 &lt；output> 的 `name` 也必须一致。&lt；nodedef> 的输入和令牌可以在节点图实现中节点的 &lt；input> 和 &lt；token> 元素中使用 `interfacename` 属性代替 `value` 或 `nodename` 属性来引用，例如 nodedef 输入 "i2" 和接口令牌 "diffmap" 可以如下引用:
+&lt;nodedef> 的 &lt;output> 的类型与节点图 &lt;output> 的类型必须一致，如果有多个输出，则 &lt;nodegraph> 和 &lt;nodedef> 中 &lt;output> 的 `name` 也必须一致。&lt;nodedef> 的输入和令牌可以在节点图实现中节点的 &lt;input> 和 &lt;token> 元素中使用 `interfacename` 属性代替 `value` 或 `nodename` 属性来引用，例如 nodedef 输入 "i2" 和接口令牌 "diffmap" 可以如下引用:
 
 ```xml
     <input name="in2" type="color3" interfacename="i2"/>
     <token name="map1" type="string" interfacename="diffmap"/>
 ```
 
-请注意，节点图中节点的统一 &lt；input> 可以使用 `interfacename` 引用 nodedef 中的统一输入，但不能引用非统一 nodedef 输入。
+请注意，节点图中节点的统一 &lt;input> 可以使用 `interfacename` 引用 nodedef 中的统一输入，但不能引用非统一 nodedef 输入。
 
 
 #### 复合节点图
 
-**复合 &lt；nodegraph>** 元素可以指定一个或多个子 &lt；input> 和/或 &lt；token> 元素。在这种情况下，&lt；nodegraph> 作为包含节点的可折叠 "包装器"。
+**复合 &lt;nodegraph>** 元素可以指定一个或多个子 &lt;input> 和/或 &lt;token> 元素。在这种情况下，&lt;nodegraph> 作为包含节点的可折叠 "包装器"。
 
 ```xml
   <nodegraph name="graphname">
@@ -1203,7 +1203,7 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
   </nodegraph>
 ```
 
-复合节点图提供一组命名的输入和输出连接端口，其包含的节点可以使用 `interfacename` 属性引用这些端口，以及接口令牌名称，其值可以替换到节点图中使用的文件名中；此 &lt；nodegraph> 内的节点采用该节点图的上下文。复合节点图的 &lt；input> 和 &lt；token> 也可以使用 `nodename` 属性连接到与 &lt；nodegraph> 本身相同范围内的 &lt；nodegraph> 之外的其他节点；复合节点图内节点的输入只能连接到同一复合节点图内其他节点的输出，或使用 interfacename 连接到输入连接端口。这与 &lt；backdrop> 节点形成对比，后者的包含节点直接连接到背景外的节点，在相同的上下文级别，而不经过中间命名的 &lt；input>。这种形式的 &lt；nodegraph> 元素可以指定与 &lt；backdrop> 节点相同的 float `width` 和 `height` 以及 boolean `minimized` 属性。其他节点的输入，或复合节点图的输入，可以使用节点 &lt；input> 上的 `nodegraph` 属性（对于多输出复合节点图，还有 `output` 属性）连接到（不同的）复合节点图的输出。
+复合节点图提供一组命名的输入和输出连接端口，其包含的节点可以使用 `interfacename` 属性引用这些端口，以及接口令牌名称，其值可以替换到节点图中使用的文件名中；此 &lt;nodegraph> 内的节点采用该节点图的上下文。复合节点图的 &lt;input> 和 &lt;token> 也可以使用 `nodename` 属性连接到与 &lt;nodegraph> 本身相同范围内的 &lt;nodegraph> 之外的其他节点；复合节点图内节点的输入只能连接到同一复合节点图内其他节点的输出，或使用 interfacename 连接到输入连接端口。这与 &lt;backdrop> 节点形成对比，后者的包含节点直接连接到背景外的节点，在相同的上下文级别，而不经过中间命名的 &lt;input>。这种形式的 &lt;nodegraph> 元素可以指定与 &lt;backdrop> 节点相同的 float `width` 和 `height` 以及 boolean `minimized` 属性。其他节点的输入，或复合节点图的输入，可以使用节点 &lt;input> 上的 `nodegraph` 属性（对于多输出复合节点图，还有 `output` 属性）连接到（不同的）复合节点图的输出。
 
 允许为自定义节点定义多个基于节点图和/或文件的实现,用于相同的输入和输出类型组合,只要指定的 `version`/`target`/`format` 组合是唯一的,例如一个 target "oslpattern" 的实现和另一个 "glsl" 的实现,或者一个 "osl" target 且 `format="shader"` 和另一个 `format="fragment"`。允许同一 nodedef target/version 同时存在 &lt;nodegraph> 和 &lt;implementation>,&lt;implementation> 通常优先以允许优化的本机代码节点实现,尽管最终由宿主应用程序确定实际使用哪个实现。
 
@@ -1230,12 +1230,12 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
   </nodegraph>
 ```
 
-节点图的输入由 &lt；nodedef> 声明，节点图中的节点使用 `interfacename` 属性引用这些输入。"fg" 和 "bg" 输入提供默认值，如果在使用自定义节点时输入保持未连接，则使用这些默认值，"amount" 输入定义默认值，如果节点的调用未明确为 "amount" 提供值，则使用该默认值。
+节点图的输入由 &lt;nodedef> 声明，节点图中的节点使用 `interfacename` 属性引用这些输入。"fg" 和 "bg" 输入提供默认值，如果在使用自定义节点时输入保持未连接，则使用这些默认值，"amount" 输入定义默认值，如果节点的调用未明确为 "amount" 提供值，则使用该默认值。
 
 
 ### 自定义节点使用
 
-一旦使用 &lt；nodedef> 定义，在节点图中使用自定义节点遵循与任何其他标准节点相同的语法:元素的名称是自定义节点的名称，并且需要节点输出的 MaterialX 类型；自定义节点的子元素定义输入到其他节点输出的连接以及自定义节点的任何输入值。
+一旦使用 &lt;nodedef> 定义，在节点图中使用自定义节点遵循与任何其他标准节点相同的语法:元素的名称是自定义节点的名称，并且需要节点输出的 MaterialX 类型；自定义节点的子元素定义输入到其他节点输出的连接以及自定义节点的任何输入值。
 
 ```xml
   <mariCustomNoise name="custnoise1" type="color3">
@@ -1271,7 +1271,7 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
 
 ## 着色器节点
 
-输出具有 "shader" 语义的数据类型的自定义节点在 MaterialX 中称为 "着色器节点"。着色器及其输入使用上述相同的 &lt；nodedef>、&lt;implementation> 和 &lt；nodegraph> 元素声明:
+输出具有 "shader" 语义的数据类型的自定义节点在 MaterialX 中称为 "着色器节点"。着色器及其输入使用上述相同的 &lt;nodedef>、&lt;implementation> 和 &lt;nodegraph> 元素声明:
 
 ```xml
   <nodedef name="name" node="shaderfunctionname">
@@ -1283,9 +1283,9 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
 &lt;nodedef> 元素与着色器声明相关的属性:
 
 * `name`（字符串，必需）：用户为此着色器节点定义元素选择的名称。
-* `node`（字符串，必需）：正在定义的着色器节点的名称，通常与关联的着色器函数的名称匹配，如 "blinn_phong"、"disney_principled"、"volumecloud_vol"。就像自定义节点一样，此着色程序可以通过 &lt；implementation> 或 &lt；nodegraph> 精确定义，或者留给应用程序使用其选择的任何着色器定义方法按名称定位。
+* `node`（字符串，必需）：正在定义的着色器节点的名称，通常与关联的着色器函数的名称匹配，如 "blinn_phong"、"disney_principled"、"volumecloud_vol"。就像自定义节点一样，此着色程序可以通过 &lt;implementation> 或 &lt;nodegraph> 精确定义，或者留给应用程序使用其选择的任何着色器定义方法按名称定位。
 
-&lt;nodedef> 内的子 &lt；output> 元素定义此着色器输出的 "数据类型"，该类型必须已用 "shader" 语义定义；有关详细信息，请参阅上面的 [自定义数据类型](#custom-data-types) 部分和下面的讨论。
+&lt;nodedef> 内的子 &lt;output> 元素定义此着色器输出的 "数据类型"，该类型必须已用 "shader" 语义定义；有关详细信息，请参阅上面的 [自定义数据类型](#custom-data-types) 部分和下面的讨论。
 
 定义着色器节点的 NodeDef 元素通常不包括 `default` 或 `defaultinput` 属性，但如果着色器节点的输出类型不是盲数据类型，则允许使用 [自定义数据类型](#custom-data-types) 部分中描述的语法。
 
@@ -1318,9 +1318,9 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
   </unified_srf>
 ```
 
-着色器节点源实现的声明可以使用外部源文件声明的 &lt；implementation> 元素，或使用基于节点图定义的功能节点图来完成。
+着色器节点源实现的声明可以使用外部源文件声明的 &lt;implementation> 元素，或使用基于节点图定义的功能节点图来完成。
 
-与非着色器自定义节点一样，**Input** 元素在 &lt；nodedef> 中用于声明着色器节点的输入端口。
+与非着色器自定义节点一样，**Input** 元素在 &lt;nodedef> 中用于声明着色器节点的输入端口。
 
 具有着色器语义类型的输入可以赋予 "" 值以指示没有着色器节点连接到此输入；这通常是操作符节点着色器语义输入的默认值。由应用程序决定如何处理未连接的着色器语义输入。
 
@@ -1330,7 +1330,7 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
 
 ## 材质节点
 
-输出具有 "material" 语义的数据类型的自定义节点在 MaterialX 中称为 "材质节点"。材质节点通常有一个或多个 "shader" 语义输入，用于建立材质引用的着色器；以前版本的 MaterialX 使用 &lt；shaderref> 元素来建立这些着色器到材质的连接。材质节点使用与上述相同的 &lt；nodedef> 元素声明:
+输出具有 "material" 语义的数据类型的自定义节点在 MaterialX 中称为 "材质节点"。材质节点通常有一个或多个 "shader" 语义输入，用于建立材质引用的着色器；以前版本的 MaterialX 使用 &lt;shaderref> 元素来建立这些着色器到材质的连接。材质节点使用与上述相同的 &lt;nodedef> 元素声明:
 
 ```xml
   <nodedef name="name" node="materialname">
@@ -1557,7 +1557,7 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
 
 ## 材质变体
 
-变体是材质输入和接口令牌的任意数量统一值的容器。一个或多个互斥变体定义为 &lt；variantset> 的一部分；变体不能在 &lt；variantset> 之外定义。
+变体是材质输入和接口令牌的任意数量统一值的容器。一个或多个互斥变体定义为 &lt;variantset> 的一部分；变体不能在 &lt;variantset> 之外定义。
 
 ```xml
   <variantset name="wetvars">
@@ -1570,18 +1570,18 @@ NodeDefs 的 &lt；output> 元素与 NodeGraph 输出的类似，但它们可以
   </variantset>
 ```
 
-&lt;variant> 内的 &lt；Input> 元素只能定义 `value`，不能定义到节点或 &lt；output> 的连接。
+&lt;variant> 内的 &lt;Input> 元素只能定义 `value`，不能定义到节点或 &lt;output> 的连接。
 
 变体的示例用途包括为不同的服装变化定义许多允许的颜色和纹理令牌，以及为模型的逐渐增加的损坏级别定义值。
 
-变体和变体集本质上不与任何特定材质关联；它们只是说明许多命名输入/令牌的许多值。但是，变体集可以通过提供 stringarray 类型的 `node` 和/或 `nodedef` 属性来说明它们与特定的着色器语义节点和/或 &lt；nodedef> 声明相关联:
+变体和变体集本质上不与任何特定材质关联；它们只是说明许多命名输入/令牌的许多值。但是，变体集可以通过提供 stringarray 类型的 `node` 和/或 `nodedef` 属性来说明它们与特定的着色器语义节点和/或 &lt;nodedef> 声明相关联:
 
 ```xml
   <variantset name="costumevars" nodedef="ND_unifiedsrf_studio">
     ...
 ```
 
-变体和变体集可以在任何 MaterialX 实现中定义，但由于变体应用于 &lt；look> 内的材质，因此只能在支持 MaterialX 几何扩展的应用程序中应用；请参阅该文档中的 [**VariantAssign 元素**](./MaterialX.GeomExts.md#variantassign-elements) 部分，了解如何使用材质变体。
+变体和变体集可以在任何 MaterialX 实现中定义，但由于变体应用于 &lt;look> 内的材质，因此只能在支持 MaterialX 几何扩展的应用程序中应用；请参阅该文档中的 [**VariantAssign 元素**](./MaterialX.GeomExts.md#variantassign-elements) 部分，了解如何使用材质变体。
 
 <br>
 
