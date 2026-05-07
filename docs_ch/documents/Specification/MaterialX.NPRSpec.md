@@ -94,4 +94,4 @@ Gooch 着色通过根据表面法线和光线方向之间的角度混合颜色�
 
 # 参考文献
 
-[^Gooch1998]: Gooch 等人，**用于自动技术插图的非真实感光照模型**， <https://users.cs.northwestern.edu/~ago820/SIG98/gooch98.pdf>, 1998。
+[^Gooch1998]: Gooch 等人，**用于自动技术插图的非真实感光照模型**，<https://users.cs.northwestern.edu/~ago820/SIG98/gooch98.pdf>, 1998。

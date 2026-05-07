@@ -131,7 +131,7 @@ MaterialX 文件中的某些元素支持通过表达式进行几何体规范。M
 
 ## 几何前缀
 
-作为简写便利，MaterialX 允许指定一个 `geomprefix` 属性，该属性将被附加到 `geomname` 或 `geomnamearray` 类型的数据值（例如 `<geominfo>`, `<collection>`, `<materialassign>`， 和 `<visibility>` 元素中的 `geom` 属性）指定的范围内元素定义的 `geomprefix` 中，类似于 MaterialX 允许指定一个 `fileprefix` 属性，该属性将被附加到类型为 "filename" 的输入值。对于类型为 "geomnamearray" 的数据值，`geomprefix` 将被附加到每个逗号分隔的几何名称。由于前缀和几何体的值是字符串连接的，`geomprefix` 的值通常应以 "/" 结尾。Geomprefix 常用于拆分几何体路径中所有几何体名称的前导部分，例如定义 "资产根" 路径。
+作为简写便利，MaterialX 允许指定一个 `geomprefix` 属性，该属性将被附加到 `geomname` 或 `geomnamearray` 类型的数据值（例如 `<geominfo>`, `<collection>`, `<materialassign>`，和 `<visibility>` 元素中的 `geom` 属性）指定的范围内元素定义的 `geomprefix` 中，类似于 MaterialX 允许指定一个 `fileprefix` 属性，该属性将被附加到类型为 "filename" 的输入值。对于类型为 "geomnamearray" 的数据值，`geomprefix` 将被附加到每个逗号分隔的几何名称。由于前缀和几何体的值是字符串连接的，`geomprefix` 的值通常应以 "/" 结尾。Geomprefix 常用于拆分几何体路径中所有几何体名称的前导部分，例如定义 "资产根" 路径。
 
 因此，以下 MTLX 文件片段是等效的:
 
@@ -168,7 +168,7 @@ MaterialX 文件中的某些元素支持通过表达式进行几何体规范。M
 | &lt;<em>geometry token</em>> | 为当前几何体声明的 &lt;geominfo> 元素或作为统一 primvar 值（通常是字符串或整数）的指定 token 的值。 |
 
 
-只有完全支持几何扩展的应用程序才允许在更大的文件名字符串中使用 &lt;_geometry token_>。所有应用程序都应允许使用 "&lt;_geometry token_>" 作为完整的文件名字符串，在这种情况下，存储在几何体中的字符串 primvar 值将作为文件名使用不变；字符串 primvar 值本身可能允许包含另一个 token，例如 &lt;UDIM>， 渲染器可能能够解析并替换它。
+只有完全支持几何扩展的应用程序才允许在更大的文件名字符串中使用 &lt;_geometry token_>。所有应用程序都应允许使用 "&lt;_geometry token_>" 作为完整的文件名字符串，在这种情况下，存储在几何体中的字符串 primvar 值将作为文件名使用不变；字符串 primvar 值本身可能允许包含另一个 token，例如 &lt;UDIM>，渲染器可能能够解析并替换它。
 
 <br>
 

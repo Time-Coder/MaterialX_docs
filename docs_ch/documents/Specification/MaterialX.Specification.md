@@ -200,7 +200,7 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
     vector4value = "-0.13,12.883,91.7,1.0"
 ```
 
-虽然 color<em>N</em> 和 vector<em>N</em> 类型都描述浮点值向量，但它们在许多重要方面有所不同。首先，color4 值的最后一个通道被合成运算符解释为 alpha 通道，仅在 [0， 1] 范围内有意义，而 vector4 值的第四个通道_可以_（但不一定）被解释为齐次 3D 向量的 "w" 值。此外，color3 和 color4 类型的值始终与特定色彩空间关联并受颜色转换影响，而 vector3 和 vector4 类型的值则不受影响。有关 color<em>N</em> 和 vector<em>N</em> 操作的更详细规则可在规范的 [标准操作符节点](./MaterialX.StandardNodes.md#standard-operator-nodes) 部分找到。
+虽然 color<em>N</em> 和 vector<em>N</em> 类型都描述浮点值向量，但它们在许多重要方面有所不同。首先，color4 值的最后一个通道被合成运算符解释为 alpha 通道，仅在 [0, 1] 范围内有意义，而 vector4 值的第四个通道_可以_（但不一定）被解释为齐次 3D 向量的 "w" 值。此外，color3 和 color4 类型的值始终与特定色彩空间关联并受颜色转换影响，而 vector3 和 vector4 类型的值则不受影响。有关 color<em>N</em> 和 vector<em>N</em> 操作的更详细规则可在规范的 [标准操作符节点](./MaterialX.StandardNodes.md#standard-operator-nodes) 部分找到。
 
 **矩阵(Matrix)** 类型：MaterialX 支持两种可用于表示几何和颜色转换的矩阵类型。`matrix33` 和 `matrix44` 类型分别表示 3x3 和 4x4 矩阵，写为九个或十六个用逗号分隔的浮点值，按行主序排列:
 
@@ -224,7 +224,7 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
     filevalue = "cmsscheme:myassetdiffuse.<UDIM>.tif?ver=current"
 ```
 
-**整数数组(IntegerArray)**、**浮点数数组(FloatArray)**、**Color3数组(Color3Array)**、**Color4数组(Color4Array)**、**Vector2数组(Vector2Array)**、**Vector3数组(Vector3Array)**、**Vector4数组(Vector4Array)**、**字符串数组(StringArray)**：任意数量（包括零）相同基本类型的值，用逗号分隔（可以有空格也可以没有），在引号内；color3、color4、vector2、vector3 或 vector4 的数组只是按顺序排列的通道值的一维列表，例如 "r0， g0, b0, r1, g1, b1, r2, g2, b2"。stringarray 中的单个字符串值不能包含逗号或分号，并且其中的任何前导和尾随空格字符都将被忽略。MaterialX 不支持多维或嵌套数组。节点的数组类型输入必须是静态统一值，其长度由节点的另一个统一输入值指定，或由节点的实现要求隐式指定。节点不能输出数组类型。
+**整数数组(IntegerArray)**、**浮点数数组(FloatArray)**、**Color3数组(Color3Array)**、**Color4数组(Color4Array)**、**Vector2数组(Vector2Array)**、**Vector3数组(Vector3Array)**、**Vector4数组(Vector4Array)**、**字符串数组(StringArray)**：任意数量（包括零）相同基本类型的值，用逗号分隔（可以有空格也可以没有），在引号内；color3、color4、vector2、vector3 或 vector4 的数组只是按顺序排列的通道值的一维列表，例如 "r0, g0, b0, r1, g1, b1, r2, g2, b2"。stringarray 中的单个字符串值不能包含逗号或分号，并且其中的任何前导和尾随空格字符都将被忽略。MaterialX 不支持多维或嵌套数组。节点的数组类型输入必须是静态统一值，其长度由节点的另一个统一输入值指定，或由节点的实现要求隐式指定。节点不能输出数组类型。
 
 ```
     integerarrayvalue = "1,2,3,4,5"
@@ -263,19 +263,19 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
 
 &lt;typedef&gt; 元素的属性:
 
-* `name` (string， 必需)： 此类型的名称。不能与内置 MaterialX 类型相同。为了减少自定义类型名称与代码生成可能创建的变量名称之间可能的符号冲突，我们建议使用 `_struct` 作为类型名称的后缀。
-* `semantic` (string， 可选)： 此类型的语义（见上文）；默认语义为 "default"。
-* `context` (string， 可选)： 应应用此类型的语义特定上下文。对于 "shader" 语义类型，`context` 定义了解释着色器输出的渲染上下文；详情请参阅 [着色器节点](#shader-nodes) 部分。
-* `inherit` (string， 可选)： 此类型继承自的另一个类型的名称，可以是内置类型或自定义类型。没有此类型定义的应用程序可以使用继承的类型作为"回退"类型。
-* `hint` (string， 可选)： 帮助创建代码生成器的人员理解如何定义该类型的提示。目前定义了以下 typedef 提示:
+* `name` (string，必需)： 此类型的名称。不能与内置 MaterialX 类型相同。为了减少自定义类型名称与代码生成可能创建的变量名称之间可能的符号冲突，我们建议使用 `_struct` 作为类型名称的后缀。
+* `semantic` (string，可选)： 此类型的语义（见上文）；默认语义为 "default"。
+* `context` (string，可选)： 应应用此类型的语义特定上下文。对于 "shader" 语义类型，`context` 定义了解释着色器输出的渲染上下文；详情请参阅 [着色器节点](#shader-nodes) 部分。
+* `inherit` (string，可选)： 此类型继承自的另一个类型的名称，可以是内置类型或自定义类型。没有此类型定义的应用程序可以使用继承的类型作为"回退"类型。
+* `hint` (string，可选)： 帮助创建代码生成器的人员理解如何定义该类型的提示。目前定义了以下 typedef 提示:
     * "halfprecision": 此类型内的值是半精度
     * "doubleprecision": 此类型内的值是双精度
 
 &lt;member&gt; 元素的属性:
 
-* `name` (string， 必需)： 成员变量的名称。在此自定义类型的其他成员名称列表中必须唯一。
-* `type` (string， 必需)： 成员变量的类型；可以是任何内置 MaterialX 类型，或任何先前定义的自定义类型；不支持 &lt;member&gt; 类型的递归包含。
-* `value` (string， 必需)： 成员变量的默认值。
+* `name` (string，必需)： 成员变量的名称。在此自定义类型的其他成员名称列表中必须唯一。
+* `type` (string，必需)： 成员变量的类型；可以是任何内置 MaterialX 类型，或任何先前定义的自定义类型；不支持 &lt;member&gt; 类型的递归包含。
+* `value` (string，必需)： 成员变量的默认值。
 
 如果提供了多个 <member> 元素，则 MaterialX 文件可以在使用该类型的任何地方指定该类型的值，作为大括号包围、分号分隔的数字和字符串列表，期望分号之间的数字和字符串按顺序与预期的 <member> 类型完全对应。使用大括号允许嵌套自定义结构类型初始化器。例如，如果声明了以下 <typedef>:
 
