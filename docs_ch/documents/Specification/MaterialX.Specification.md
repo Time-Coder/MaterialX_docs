@@ -184,7 +184,7 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
     color4value = "0.1,0.2,0.3,1.0"
 ```
 
-注意：所有 color3 值和 color4 值的 RGB 分量都假定在封闭的 &lt;materialx&gt； 元素中定义的“工作色彩空间”中指定，尽管文档中的任何元素都可以提供 `colorspace` 属性，明确声明其范围内颜色值应解释的空间；实现应在使用这些值执行计算之前将这些颜色值转换为工作色彩空间。请参阅下面的 [色彩空间和色彩管理系统](#color-spaces-and-color-management-systems) 部分。
+注意：所有 color3 值和 color4 值的 RGB 分量都假定在封闭的 &lt;materialx&gt; 元素中定义的“工作色彩空间”中指定，尽管文档中的任何元素都可以提供 `colorspace` 属性，明确声明其范围内颜色值应解释的空间；实现应在使用这些值执行计算之前将这些颜色值转换为工作色彩空间。请参阅下面的 [色彩空间和色彩管理系统](#color-spaces-and-color-management-systems) 部分。
 
 **向量(Vector)** 类型：与颜色类似，MaterialX 支持三种不同的向量类型:
 
@@ -241,17 +241,17 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
 
 ## 自定义数据类型
 
-除了标准数据类型外，MaterialX 还支持为着色器和自定义节点的输入和输出指定自定义数据类型。这允许文档描述应用程序可能需要的任何复杂类型的数据流；示例可能包括光谱颜色样本或复合几何数据。可以使用多个 &lt;member&gt； 元素描述自定义类型内容的结构，但也只声明自定义类型的名称并将该类型视为“盲数据”。
+除了标准数据类型外，MaterialX 还支持为着色器和自定义节点的输入和输出指定自定义数据类型。这允许文档描述应用程序可能需要的任何复杂类型的数据流；示例可能包括光谱颜色样本或复合几何数据。可以使用多个 &lt;member&gt; 元素描述自定义类型内容的结构，但也只声明自定义类型的名称并将该类型视为“盲数据”。
 
 可以声明类型具有特定的语义，这可用于确定应如何解释该类型的值，以及如何连接输出该类型的节点。目前，MaterialX 定义了三种语义：
 
 * `color`： 该类型被解释为代表或包含颜色，因此应按照 [色彩空间和色彩管理系统](#color-spaces-and-color-management-systems) 部分所述进行色彩管理。
 * `shader`： 该类型被解释为着色器输出类型；输出具有 "shader" 语义的类型的节点或节点图可用于定义着色器类型节点，该节点可以连接到 "material" 类型节点的输入。
-* `material`： 该类型被解释为材质输出类型；输出具有 "material" 语义的类型的节点或节点图可以在 &lt;look&gt； 中由 &lt;materialassign&gt； 引用。
+* `material`： 该类型被解释为材质输出类型；输出具有 "material" 语义的类型的节点或节点图可以在 &lt;look&gt; 中由 &lt;materialassign&gt; 引用。
 
 未定义特定语义的类型假定具有 semantic="default"。
 
-使用 &lt;typedef&gt； 元素定义自定义类型:
+使用 &lt;typedef&gt; 元素定义自定义类型:
 
 ```xml
   <typedef name="spectrum" semantic="color"/>
@@ -261,7 +261,7 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
   </typedef>
 ```
 
-&lt;typedef&gt； 元素的属性:
+&lt;typedef&gt; 元素的属性:
 
 * `name` (string， 必需)： 此类型的名称。不能与内置 MaterialX 类型相同。为了减少自定义类型名称与代码生成可能创建的变量名称之间可能的符号冲突，我们建议使用 `_struct` 作为类型名称的后缀。
 * `semantic` (string， 可选)： 此类型的语义（见上文）；默认语义为 "default"。
@@ -271,10 +271,10 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
     * "halfprecision": 此类型内的值是半精度
     * "doubleprecision": 此类型内的值是双精度
 
-&lt;member&gt； 元素的属性:
+&lt;member&gt; 元素的属性:
 
 * `name` (string， 必需)： 成员变量的名称。在此自定义类型的其他成员名称列表中必须唯一。
-* `type` (string， 必需)： 成员变量的类型；可以是任何内置 MaterialX 类型，或任何先前定义的自定义类型；不支持 &lt;member&gt； 类型的递归包含。
+* `type` (string， 必需)： 成员变量的类型；可以是任何内置 MaterialX 类型，或任何先前定义的自定义类型；不支持 &lt;member&gt; 类型的递归包含。
 * `value` (string， 必需)： 成员变量的默认值。
 
 如果提供了多个 <member> 元素，则 MaterialX 文件可以在使用该类型的任何地方指定该类型的值，作为大括号包围、分号分隔的数字和字符串列表，期望分号之间的数字和字符串按顺序与预期的 <member> 类型完全对应。使用大括号允许嵌套自定义结构类型初始化器。例如，如果声明了以下 <typedef>:
@@ -297,7 +297,7 @@ MaterialX 中的所有值、输入和输出端口以及流都是强类型的，�
 
 如果未提供 <member> 子元素，例如如果自定义类型的内容不能表示为 MaterialX 类型列表，则无法提供值，并且此类型只能用于将盲数据从一个自定义节点的输出传递到另一个自定义节点或着色器输入。
 
-一旦由 &lt;typedef&gt； 定义了自定义类型，就可以在任何允许"任何 MaterialX 类型"的 MaterialX 元素中使用它；MaterialX 类型列表实际上被扩展为包含新的自定义类型。然而，应该注意的是，&lt;typedef&gt； 只是声明类型的存在以及可能关于其预期定义的一些提示，但由每个应用程序和代码生成器为任何类型提供其自己的精确定义。
+一旦由 &lt;typedef&gt; 定义了自定义类型，就可以在任何允许"任何 MaterialX 类型"的 MaterialX 元素中使用它；MaterialX 类型列表实际上被扩展为包含新的自定义类型。然而，应该注意的是，&lt;typedef&gt; 只是声明类型的存在以及可能关于其预期定义的一些提示，但由每个应用程序和代码生成器为任何类型提供其自己的精确定义。
 
 标准 MaterialX 发行版包括四种 "shader" 语义数据类型的定义:**surfaceshader**、**displacementshader**、**volumeshader** 和 **lightshader**。这些类型将在下面的 [着色器节点](#shader-nodes) 部分更详细地讨论。
 
@@ -314,7 +314,7 @@ MTLX 文件（文件扩展名为 ".mtlx"）具有以下一般形式:
   </materialx>
 ```
 
-即，标准的 XML 声明行后跟根 &lt;materialx&gt； 元素，其中包含任意数量的 MaterialX 元素和子元素。MTLX 文件的默认字符编码为 UTF-8,MaterialX 实现中字符串值的内存表示也期望使用此编码。
+即，标准的 XML 声明行后跟根 &lt;materialx&gt; 元素，其中包含任意数量的 MaterialX 元素和子元素。MTLX 文件的默认字符编码为 UTF-8,MaterialX 实现中字符串值的内存表示也期望使用此编码。
 
 支持标准 XML XInclude ([http://en/wikipedia.org/wiki/XInclude](http://en/wikipedia.org/wiki/Xinclude))，以及标准 XML 注释和 XML 字符实体 `&quot;`、`&amp;`、`&apos;`、`&lt;` 和 `&gt;`:
 
@@ -328,11 +328,11 @@ MTLX 文件（文件扩展名为 ".mtlx"）具有以下一般形式:
 
 每个 XIncluded 文档本身必须是有效的 MTLX 文件，包含 XML 头和其自己的根 `<materialx>` 元素，其子元素将添加到包含文档的根元素中。分层根级属性（如 `colorspace` 和 `namespace`）将分发到包含的子元素，以在包含的 MaterialX 文档中保持正确的语义。
 
-&lt;materialx&gt； 元素的属性:
+&lt;materialx&gt; 元素的属性:
 
 * `version`（string，必需）： 包含此文档符合的 MaterialX 规范版本号的字符串，指定为由点分隔的主版本号和次版本号。MaterialX 库在加载时自动将旧版本文档升级到当前 MaterialX 版本。
 * `colorspace`（string，可选）： 此元素及其所有后代的"工作色彩空间"的名称。这是所有图像输入和颜色值的默认色彩空间，也是执行所有颜色计算的色彩空间。默认为 "none"，表示不进行色彩管理。
-* `namespace`（string，可选）： 定义在此 &lt;materialx&gt； 范围内定义的所有元素的命名空间。详情请参阅下面的 [MaterialX 命名空间](#materialx-namespaces) 部分。
+* `namespace`（string，可选）： 定义在此 &lt;materialx&gt; 范围内定义的所有元素的命名空间。详情请参阅下面的 [MaterialX 命名空间](#materialx-namespaces) 部分。
 
 
 
@@ -356,9 +356,9 @@ MaterialX 支持使用色彩管理系统将 RGB 颜色和图像与特定色彩�
 * `srgb_displayp3`
 * `lin_displayp3`
 
-MaterialX 文档的工作色彩空间由其根 &lt;materialx&gt； 元素的 `colorspace` 属性定义，强烈建议所有 &lt;materialx&gt； 元素如果希望使用色彩管理工作流程而不是依赖外部配置文件的默认色彩空间设置，则定义特定的 `colorspace`。如果 MaterialX 文档被 xi:included 到另一个 MaterialX 文档中，它将继承父文档的工作色彩空间设置，除非它自己声明了特定的工作色彩空间。
+MaterialX 文档的工作色彩空间由其根 &lt;materialx&gt; 元素的 `colorspace` 属性定义，强烈建议所有 &lt;materialx&gt; 元素如果希望使用色彩管理工作流程而不是依赖外部配置文件的默认色彩空间设置，则定义特定的 `colorspace`。如果 MaterialX 文档被 xi:included 到另一个 MaterialX 文档中，它将继承父文档的工作色彩空间设置，除非它自己声明了特定的工作色彩空间。
 
-单个颜色图像文件和值的色彩空间可以通过定义文件名或值的输入中的 `colorspace` 属性来定义。其他元素（如 &lt;nodegraph&gt； 或节点实例）允许定义将应用于其范围内元素的 `colorspace` 属性；未显式提供 `colorspace` 属性的输入和文件中的颜色值将被视为处于定义 `colorspace` 属性的最近封闭范围的色彩空间中。非工作色彩空间中的颜色图像和值应在执行计算之前由应用程序转换为工作空间。在下面的示例中，图像文件已在 "srgb_texture" 色彩空间中定义，而其默认值已在 "lin_rec709" 中定义；两者都应在应用于任何计算之前转换为应用程序的工作色彩空间。
+单个颜色图像文件和值的色彩空间可以通过定义文件名或值的输入中的 `colorspace` 属性来定义。其他元素（如 &lt;nodegraph&gt; 或节点实例）允许定义将应用于其范围内元素的 `colorspace` 属性；未显式提供 `colorspace` 属性的输入和文件中的颜色值将被视为处于定义 `colorspace` 属性的最近封闭范围的色彩空间中。非工作色彩空间中的颜色图像和值应在执行计算之前由应用程序转换为工作空间。在下面的示例中，图像文件已在 "srgb_texture" 色彩空间中定义，而其默认值已在 "lin_rec709" 中定义；两者都应在应用于任何计算之前转换为应用程序的工作色彩空间。
 
 ```xml
   <image name="in1" type="color3">
@@ -377,7 +377,7 @@ MaterialX 保留色彩空间名称 "none" 表示不应对其范围内的图像�
 
 MaterialX 允许根据特定单位和单位类型定义浮点和向量值，并可以自动将值从其指定单位转换为应用程序指定的同类型场景单位。这允许图像及其表示的量（如位移量）以绝对真实世界大小指定，然后自动转换为应用程序预期的场景单位。
 
-单元类型使用 &lt;unittypedef&gt； 元素定义，该类型的一组单位使用具有一个或多个子 &lt;unit&gt； 元素的 &lt;unitdef&gt； 元素定义。MaterialX 预定义了以下单元类型和单位:
+单元类型使用 &lt;unittypedef&gt; 元素定义，该类型的一组单位使用具有一个或多个子 &lt;unit&gt; 元素的 &lt;unitdef&gt; 元素定义。MaterialX 预定义了以下单元类型和单位:
 
 
 
@@ -385,7 +385,7 @@ MaterialX 允许根据特定单位和单位类型定义浮点和向量值，并�
 
 MaterialX 允许根据特定单位和单位类型定义浮点和向量值，并可以自动将值从其指定单位转换为应用程序指定的同类型场景单位。这允许图像及其表示的量（如位移量）以绝对真实世界大小指定，然后自动转换为应用程序预期的场景单位。
 
-单元类型使用 &lt;unittypedef&gt； 元素定义，该类型的一组单位使用具有一个或多个子 &lt;unit&gt； 元素的 &lt;unitdef&gt； 元素定义。MaterialX 预定义了以下单元类型和单位:
+单元类型使用 &lt;unittypedef&gt; 元素定义，该类型的一组单位使用具有一个或多个子 &lt;unit&gt; 元素的 &lt;unitdef&gt; 元素定义。MaterialX 预定义了以下单元类型和单位:
 
 ```xml
   <unittypedef name="distance"/>
